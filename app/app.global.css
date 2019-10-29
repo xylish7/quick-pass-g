@@ -1,0 +1,20 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+@import '~@fortawesome/fontawesome-free/css/all.css';
+@import '~react-bulma-components/dist/react-bulma-components.min.css';
+@import '~bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.min.css';
+
+@font-face {
+  font-family: titleFont;
+  src: url('assets/fonts/trench.ttf');
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  width: 260px;
+}
