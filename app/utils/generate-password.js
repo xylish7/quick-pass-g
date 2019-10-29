@@ -1,4 +1,11 @@
 // @flow
+
+type Checks =
+  | { lower: boolean }
+  | { upper: boolean }
+  | { number: boolean }
+  | { symbol: boolean };
+
 const randomFunc: {
   lower(): string,
   upper(): string,
@@ -32,7 +39,7 @@ function getRandomUpper(): string {
  * @returns {String}
  */
 function getRandomNumber(): string {
-  return +String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
 }
 
 /**
@@ -43,9 +50,9 @@ function getRandomSymbol() {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-function generateRandomPairOfChars(typesArr: Array<boolean>): string {
+function generateRandomPairOfChars(typesArr: Array<Checks>): string {
   let generatedPair: string = '';
-  typesArr.forEach(type => {
+  typesArr.forEach((type: Checks) => {
     const funcName: string = Object.keys(type)[0];
     generatedPair += randomFunc[funcName]();
   });
@@ -74,7 +81,7 @@ function generatePassword(
   let generatedPassword: string = '';
   const typesCount: number = lower + upper + number + symbol;
 
-  const typesArr: Array<boolean> = [
+  const typesArr: Array<Checks> = [
     { lower },
     { upper },
     { number },

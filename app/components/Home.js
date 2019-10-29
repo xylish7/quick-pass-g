@@ -17,6 +17,7 @@ type Checkboxes = {
 };
 
 function Home() {
+  const [isCopied: boolean, setIsCopied] = useState(false);
   const [isChecked: boolean, setIsChecked] = useState(true);
   const [passLength: number, setPassLength] = useState(10);
   const [password: string, setPassword] = useState('');
@@ -82,13 +83,19 @@ function Home() {
    * Copy password to clipboard
    */
   const copyToClipboard = (): void => {
-    clipboard.writeText(password);
+    if (password !== '') {
+      clipboard.writeText(password);
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    }
   };
 
   return (
     <div className={styles.root}>
       {/* Title */}
-      <h2 className={`has-text-danger ${styles.title}`}>quickPassG</h2>
+      <h2 className={`has-text-primary ${styles.title}`}>quickPassG</h2>
 
       {/* Password input filed */}
       <Form.Field className={styles.passwordFormField}>
@@ -96,7 +103,7 @@ function Home() {
           <Form.Input type="text" value={password} readOnly />
 
           {!isChecked && (
-            <Form.Help color="danger">
+            <Form.Help color="primary">
               Please select one or more of the charsets below
             </Form.Help>
           )}
@@ -105,11 +112,14 @@ function Home() {
         <Icon
           className={styles.clipboardIcon}
           style={{ height: 36, width: 40 }}
-          icon="clipboard"
-          color="danger"
+          color="primary"
           onClick={copyToClipboard}
         >
-          <i className="far fa-clipboard" />
+          {isCopied ? (
+            <i className="fas fa-check" />
+          ) : (
+            <i className="far fa-clipboard" />
+          )}
         </Icon>
       </Form.Field>
       {/* Length of the password + checkboxes */}
@@ -135,7 +145,7 @@ function Home() {
         {/* Upper case */}
         <Checkbox
           type="checkbox"
-          color="danger"
+          color="primary"
           size="small"
           name="upperCase"
           label="Upper-case (A, B, C, ...)"
@@ -145,7 +155,7 @@ function Home() {
         {/* Lower case */}
         <Checkbox
           type="checkbox"
-          color="danger"
+          color="primary"
           size="small"
           name="lowerCase"
           label="Lower-case (a, b, c, ...)"
@@ -155,7 +165,7 @@ function Home() {
         {/* Digits */}
         <Checkbox
           type="checkbox"
-          color="danger"
+          color="primary"
           size="small"
           name="digits"
           label="Digits (0, 1, 2, ...)"
@@ -165,7 +175,7 @@ function Home() {
         {/* Special characters */}
         <Checkbox
           type="checkbox"
-          color="danger"
+          color="primary"
           size="small"
           name="special"
           label="Special (!, $, %, ...)"
@@ -174,7 +184,7 @@ function Home() {
         />
       </div>
       {/* Generate password button */}
-      <Button color="danger" fullwidth onClick={generatePass}>
+      <Button color="primary" fullwidth onClick={generatePass}>
         Generate password
       </Button>
     </div>
