@@ -5,9 +5,10 @@ import { clipboard } from 'electron';
 import { Button, Columns, Form, Icon } from 'react-bulma-components';
 import styles from './Home.css';
 
-import generatePassword from '../utils/generate-password';
+import generatePassword from '../../utils/generate-password';
 
-import Checkbox from '../ui_components/Checkbox';
+import Checkbox from '../../ui_components/Checkbox';
+import Menu from '../Menu/Menu';
 
 type Checkboxes = {
   upperCase: boolean,
@@ -94,6 +95,7 @@ function Home() {
 
   return (
     <div className={styles.root}>
+      <Menu />
       {/* Title */}
       <h2 className={`has-text-primary ${styles.title}`}>quickPassG</h2>
 

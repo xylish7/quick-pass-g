@@ -1,5 +1,5 @@
 .root {
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
@@ -9,6 +9,8 @@
 
 .passwordFormField {
   position: relative;
+  width: 252px;
+  margin: auto;
 }
 
 .clipboardIcon {
@@ -26,15 +28,15 @@
 }
 
 .title {
-  text-align: center;
   font-family: titleFont, sans-serif;
   font-size: 35px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-left: 15px;
 }
 
 .passwordOptions {
   margin: 15px;
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 40px;
 }
 
 .passLength {
