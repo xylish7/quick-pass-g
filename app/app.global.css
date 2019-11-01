@@ -11,6 +11,16 @@
   src: url('assets/fonts/trench.ttf');
 }
 
+[data-theme='dark'] {
+  --font-color: #e1e1ff;
+  --bg-color: #161625;
+}
+
+.container-after-titlebar {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+}
+
 html {
   overflow: hidden;
 }

@@ -1,6 +1,6 @@
 {
-  "name": "quick-pass-g",
-  "productName": "quickPassG",
+  "name": "emerald-lock",
+  "productName": "Emerald Lock",
   "version": "1.1.0",
   "description": "A simple app to generate passwords",
   "scripts": {
@@ -57,8 +57,8 @@
   },
   "main": "./app/main.prod.js",
   "build": {
-    "productName": "quickPassG",
-    "appId": "com.quickPassG",
+    "productName": "Emerald Lock",
+    "appId": "com.EmeraldLock",
     "files": [
       "app/dist/",
       "app/app.html",
@@ -102,13 +102,13 @@
     "publish": {
       "provider": "github",
       "owner": "xylish7",
-      "repo": "quick-pass-g",
+      "repo": "emerald-lock",
       "private": false
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xylish7/quick-pass-g.git"
+    "url": "git+https://github.com/xylish7/emerald-lock.git"
   },
   "author": {
     "name": "Filip Frincu",
@@ -121,7 +121,7 @@
     "generator",
     "simple"
   ],
-  "homepage": "https://github.com/xylish7/quick-pass-g#readme",
+  "homepage": "https://github.com/xylish7/emerald-lock#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {

@@ -1,9 +1,15 @@
 // @flow
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import type { ThemeMode } from '../../actions/menu';
 
 import styles from './Menu.css';
 
-function Menu() {
+type Props = {
+  setThemeMode: (mode: ThemeMode) => void
+};
+
+function Menu(props: Props) {
   const containerRef = useRef(null);
   const [open: boolean, setOpen] = useState(false);
 
@@ -20,10 +26,21 @@ function Menu() {
    *
    * @param {Event} e
    */
-  const handleClick = (e: event) => {
+  const handleClick = e => {
     if (!containerRef.current.contains(e.target)) {
       setOpen(false);
     }
+  };
+
+  const setThemeMode = (mode: ThemeMode) => {
+    if (mode === 'light')
+      document.documentElement.setAttribute('data-theme', 'light');
+    if (mode === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+
+    setOpen(false);
+
+    props.setThemeMode(mode);
   };
 
   return (
@@ -39,10 +56,10 @@ function Menu() {
         <div className={styles.btnApp} onClick={() => setOpen(false)}>
           <i className={`${styles.far} has-text-primary fas fa-tint`} />
         </div>
-        <div className={styles.btnApp} onClick={() => setOpen(false)}>
+        <div className={styles.btnApp} onClick={() => setThemeMode('dark')}>
           <i className={`${styles.far} has-text-warning far fa-moon`} />
         </div>
-        <div className={styles.btnApp} onClick={() => setOpen(false)}>
+        <div className={styles.btnApp} onClick={() => setThemeMode('light')}>
           <i className={`${styles.far} has-text-warning far fa-sun`} />
         </div>
       </div>
@@ -61,5 +78,9 @@ function Menu() {
     </div>
   );
 }
+
+Menu.propTypes = {
+  setThemeMode: PropTypes.func.isRequired
+};
 
 export default Menu;

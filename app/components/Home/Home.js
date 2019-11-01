@@ -8,7 +8,7 @@ import styles from './Home.css';
 import generatePassword from '../../utils/generate-password';
 
 import Checkbox from '../../ui_components/Checkbox';
-import Menu from '../Menu/Menu';
+import Menu from '../../containers/Menu';
 
 type Checkboxes = {
   upperCase: boolean,
@@ -97,7 +97,7 @@ function Home() {
     <div className={styles.root}>
       <Menu />
       {/* Title */}
-      <h2 className={`has-text-primary ${styles.title}`}>quickPassG</h2>
+      <h2 className={`has-text-primary ${styles.title}`}>Emerald Lock</h2>
 
       {/* Password input filed */}
       <Form.Field className={styles.passwordFormField}>
