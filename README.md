@@ -47,9 +47,9 @@ For now, the app is available only for Windows, but in the future you should be 
 
 <ul>
   <li> Microsoft Windows Installer package:
-    <a href="https://github.com/xylish7/quick-pass-g/releases/download/v1.1.0/quickPassG-1.1.0.msi"> quickPassG.msi </a>
+    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.2.0/emerald-lock-1.2.0.msi"> Emerald Lock.msi </a>
   </li>
   <li> Exe setup: 
-    <a href="https://github.com/xylish7/quick-pass-g/releases/download/v1.1.0/quick-pass-g-setup-1.1.0.exe"> quickPassG.exe </a>
+    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.2.0/emerald-lock-setup-1.2.0.exe"> Emerald Lock.exe </a>
   </li>
 </ul>
