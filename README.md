@@ -1,21 +1,22 @@
 <p align="center">
-  <img src="readme-assets/quickPassG-icon-64x64.png"> 
+  <img src="readme-assets/EmeraldLock-icon-64x64.png"> 
 </p>
 <p align="center">
-  <img src="readme-assets/quickPassG-name.png"> 
+  <img src="readme-assets/EmeraldLock-name.png"> 
 </p>
 <hr>
 
 <p> A simple, nice looking 👌, password generator 🔐, which takes care of generating your passwords for you :point_down:.</p>
 
 <p align="center">
-  <img src="readme-assets/quickPassG-initial.png"> <img src="readme-assets/quickPassG-generated.png">
+  <img src="readme-assets/EmeraldLock-initial.png"> <img src="readme-assets/EmeraldLock-generated.png">
 </p>
 <p align="center">
-  <img src="readme-assets/quickPassG-error.png"> 
+  <img src="readme-assets/EmeraldLock-error.png"> 
 </p>
 
 ### What it offers
+
 <ul>
   <li> simple interface, but with a nice bulma style </li>
   <li> generates passwords with a length from 8 to 20 </li>
@@ -39,9 +40,11 @@
 :star: I'm also open to any new features that I can add
 
 ### Installation
+
 For now, the app is available only for Windows, but in the future you should be able to use it on Linux and Mac.
 
 #### Windows
+
 <ul>
   <li> Microsoft Windows Installer package:
     <a href="https://github.com/xylish7/quick-pass-g/releases/download/v1.1.0/quickPassG-1.1.0.msi"> quickPassG.msi </a>
