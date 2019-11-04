@@ -1,7 +1,7 @@
 {
   "name": "emerald-lock",
   "productName": "Emerald Lock",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A simple app to generate passwords",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
