@@ -18,7 +18,6 @@
   cursor: pointer;
 }
 .menuToggle .fas {
-  color: #fff;
   font-size: 18px;
   display: table-cell;
   vertical-align: middle;
@@ -35,7 +34,6 @@
   border-radius: 50%;
   position: absolute;
   background-color: rgb(80, 80, 80);
-  color: red;
   text-align: center;
   cursor: pointer;
 }

@@ -1,12 +1,15 @@
 // @flow
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import type { ThemeMode } from '../../actions/menu';
+import type { ThemeMode, ThemeColor } from '../../actions/menu';
+import type { MenuState } from '../../reducers/menu';
 
 import styles from './Menu.css';
 
 type Props = {
-  setThemeMode: (mode: ThemeMode) => void
+  menu: MenuState,
+  setThemeMode: (themeMode: ThemeMode) => void,
+  setThemeColor: (themeColor: ThemeColor) => void
 };
 
 function Menu(props: Props) {
@@ -26,52 +29,92 @@ function Menu(props: Props) {
    *
    * @param {Event} e
    */
-  const handleClick = e => {
+  const handleClick = (e): void => {
     if (!containerRef.current.contains(e.target)) {
       setOpen(false);
     }
   };
 
-  const setThemeMode = (mode: ThemeMode) => {
-    if (mode === 'light')
-      document.documentElement.setAttribute('data-theme', 'light');
-    if (mode === 'dark')
-      document.documentElement.setAttribute('data-theme', 'dark');
+  /**
+   * Set the theme mode of the app
+   *
+   * @param {ThemeMode} themeMode
+   */
+  const setThemeMode = (themeMode: ThemeMode): void => {
+    props.setThemeMode(themeMode);
 
     setOpen(false);
-
-    props.setThemeMode(mode);
   };
+
+  /**
+   * Set the theme color of the app
+   *
+   * @param {ThemeColor} themeColor
+   */
+  const setThemeColor = (themeColor: ThemeColor): void => {
+    props.setThemeColor(themeColor);
+
+    setOpen(false);
+  };
+
+  // Custom style of the menu togle button dependet of the
+  // [themeColor] prop
+  let menuToggleBackground: string;
+  switch (props.menu.themeColor) {
+    case 'primary':
+      menuToggleBackground = 'rgb(0, 209, 178)';
+      break;
+    case 'info':
+      menuToggleBackground = 'rgb(32, 156, 238)';
+      break;
+    case 'warning':
+      menuToggleBackground = 'rgb(255, 221, 87)';
+      break;
+    case 'danger':
+      menuToggleBackground = 'rgb(255, 56, 96)';
+      break;
+    default:
+      break;
+  }
 
   return (
     <div ref={containerRef} className={styles.container}>
       <div
         onClick={() => setOpen(!open)}
+        style={{ backgroundColor: menuToggleBackground }}
         className={`${styles.menuToggle} ${open ? styles.open : null} `}
       >
         <span className={`${styles.fas} fas fa-plus`} />
       </div>
 
       <div className={`${styles.menuRound} ${open ? styles.open : null} `}>
-        <div className={styles.btnApp} onClick={() => setOpen(false)}>
+        <div className={styles.btnApp} onClick={() => setThemeColor('primary')}>
           <i className={`${styles.far} has-text-primary fas fa-tint`} />
         </div>
         <div className={styles.btnApp} onClick={() => setThemeMode('dark')}>
-          <i className={`${styles.far} has-text-warning far fa-moon`} />
+          {props.menu.themeMode === 'light' ? (
+            <i className={`${styles.far} has-text-warning far fa-moon`} />
+          ) : (
+            <i className={`${styles.fas} has-text-warning fas fa-moon`} />
+          )}
         </div>
         <div className={styles.btnApp} onClick={() => setThemeMode('light')}>
-          <i className={`${styles.far} has-text-warning far fa-sun`} />
+          {props.menu.themeMode === 'light' ? (
+            <i className={`${styles.fas} has-text-warning fas fa-sun`} />
+          ) : (
+            <i className={`${styles.far} has-text-warning far fa-sun`} />
+          )}
         </div>
       </div>
 
       <div className={`${styles.menuLine} ${open ? styles.open : null} `}>
-        <div className={styles.btnApp} onClick={() => setOpen(false)}>
+        <div className={styles.btnApp} onClick={() => setThemeColor('info')}>
           <i className={`${styles.fas} has-text-info fas fa-tint`} />
         </div>
-        <div className={styles.btnApp} onClick={() => setOpen(false)}>
+        <div className={styles.btnApp} onClick={() => setThemeColor('warning')}>
           <i className={`${styles.fas} has-text-warning fas fa-tint`} />
         </div>
-        <div className={styles.btnApp} onClick={() => setOpen(false)}>
+        <div className={styles.btnApp} onClick={() => setThemeColor('danger')}>
           <i className={`${styles.fas} has-text-danger fas fa-tint`} />
         </div>
       </div>
@@ -80,7 +123,9 @@ function Menu(props: Props) {
 }
 
 Menu.propTypes = {
-  setThemeMode: PropTypes.func.isRequired
+  menu: PropTypes.object.isRequired,
+  setThemeMode: PropTypes.func.isRequired,
+  setThemeColor: PropTypes.func.isRequired
 };
 
 export default Menu;

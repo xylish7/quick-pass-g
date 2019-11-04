@@ -1,5 +1,6 @@
 // @flow
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { clipboard } from 'electron';
 
 import { Button, Columns, Form, Icon } from 'react-bulma-components';
@@ -9,6 +10,7 @@ import generatePassword from '../../utils/generate-password';
 
 import Checkbox from '../../ui_components/Checkbox';
 import Menu from '../../containers/Menu';
+import type { MenuState } from '../../reducers/menu';
 
 type Checkboxes = {
   upperCase: boolean,
@@ -17,7 +19,11 @@ type Checkboxes = {
   special: boolean
 };
 
-function Home() {
+type Props = {
+  menu: MenuState
+};
+
+function Home(props: Props) {
   const [isCopied: boolean, setIsCopied] = useState(false);
   const [isChecked: boolean, setIsChecked] = useState(true);
   const [passLength: number, setPassLength] = useState(10);
@@ -97,7 +103,9 @@ function Home() {
     <div className={styles.root}>
       <Menu />
       {/* Title */}
-      <h2 className={`has-text-primary ${styles.title}`}>Emerald Lock</h2>
+      <h2 className={`has-text-${props.menu.themeColor} ${styles.title}`}>
+        Emerald Lock
+      </h2>
 
       {/* Password input filed */}
       <Form.Field className={styles.passwordFormField}>
@@ -105,7 +113,7 @@ function Home() {
           <Form.Input type="text" value={password} readOnly />
 
           {!isChecked && (
-            <Form.Help color="primary">
+            <Form.Help color={props.menu.themeColor}>
               Please select one or more of the charsets below
             </Form.Help>
           )}
@@ -114,7 +122,7 @@ function Home() {
         <Icon
           className={styles.clipboardIcon}
           style={{ height: 36, width: 40 }}
-          color="primary"
+          color={props.menu.themeColor}
           onClick={copyToClipboard}
         >
           {isCopied ? (
@@ -147,7 +155,7 @@ function Home() {
         {/* Upper case */}
         <Checkbox
           type="checkbox"
-          color="primary"
+          color={props.menu.themeColor}
           size="small"
           name="upperCase"
           label="Upper-case (A, B, C, ...)"
@@ -157,7 +165,7 @@ function Home() {
         {/* Lower case */}
         <Checkbox
           type="checkbox"
-          color="primary"
+          color={props.menu.themeColor}
           size="small"
           name="lowerCase"
           label="Lower-case (a, b, c, ...)"
@@ -167,7 +175,7 @@ function Home() {
         {/* Digits */}
         <Checkbox
           type="checkbox"
-          color="primary"
+          color={props.menu.themeColor}
           size="small"
           name="digits"
           label="Digits (0, 1, 2, ...)"
@@ -177,7 +185,7 @@ function Home() {
         {/* Special characters */}
         <Checkbox
           type="checkbox"
-          color="primary"
+          color={props.menu.themeColor}
           size="small"
           name="special"
           label="Special (!, $, %, ...)"
@@ -186,11 +194,15 @@ function Home() {
         />
       </div>
       {/* Generate password button */}
-      <Button color="primary" fullwidth onClick={generatePass}>
+      <Button color={props.menu.themeColor} fullwidth onClick={generatePass}>
         Generate password
       </Button>
     </div>
   );
 }
+
+Home.propTypes = {
+  menu: PropTypes.object.isRequired
+};
 
 export default Home;

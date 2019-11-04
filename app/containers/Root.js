@@ -19,15 +19,16 @@ new customTitlebar.Titlebar({
   maximizable: false
 });
 
-export default class Root extends Component<Props> {
-  render() {
-    const { store, history } = this.props;
-    return (
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Routes />
-        </ConnectedRouter>
-      </Provider>
-    );
-  }
+function Root(props: Props) {
+  const { store, history } = props;
+
+  return (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Routes />
+      </ConnectedRouter>
+    </Provider>
+  );
 }
+
+export default Root;
