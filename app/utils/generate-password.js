@@ -50,14 +50,21 @@ function getRandomSymbol() {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-function generateRandomPairOfChars(typesArr: Array<Checks>): string {
-  let generatedPair: string = '';
-  typesArr.forEach((type: Checks) => {
-    const funcName: string = Object.keys(type)[0];
-    generatedPair += randomFunc[funcName]();
-  });
+/**
+ * Generate a random char depending on the valoes of [typesArr]
+ *
+ * @param {Array.<Check>} typesArr
+ * @param {number} typesCount
+ */
+function generateRandomChar(
+  typesArr: Array<Checks>,
+  typesCount: number
+): string {
+  const funcName: string = Object.keys(
+    typesArr[Math.floor(Math.random() * typesCount)]
+  )[0];
 
-  return generatedPair;
+  return randomFunc[funcName]();
 }
 
 /**
@@ -94,8 +101,8 @@ function generatePassword(
   }
 
   // Generate the password
-  for (let i = 0; i < length; i += typesCount)
-    generatedPassword += generateRandomPairOfChars(typesArr);
+  for (let i = 0; i < length; i++)
+    generatedPassword += generateRandomChar(typesArr, typesCount);
 
   const finalPassword: string = generatedPassword.slice(0, length);
 
