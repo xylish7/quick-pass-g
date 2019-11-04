@@ -47,9 +47,9 @@ For now, the app is available only for Windows, but in the future you should be 
 
 <ul>
   <li> Microsoft Windows Installer package:
-    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.3.0/emerald-lock-1.3.0.msi"> Emerald Lock.msi </a>
+    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.3.1/emerald-lock-1.3.1.msi"> Emerald Lock.msi </a>
   </li>
   <li> Exe setup: 
-    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.3.0/emerald-lock-setup-1.3.0.exe"> Emerald Lock.exe </a>
+    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.3.1/emerald-lock-setup-1.3.1.exe"> Emerald Lock.exe </a>
   </li>
 </ul>
