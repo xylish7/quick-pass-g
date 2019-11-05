@@ -9,10 +9,10 @@
 <p> A simple, nice looking 👌, password generator 🔐, which takes care of generating your passwords for you :point_down:.</p>
 
 <p align="center">
-  <img src="readme-assets/EmeraldLock-light-primary.PNG"> <img src="readme-assets/EmeraldLock-dark-primary.PNG">
+  <img src="readme-assets/EmeraldLock-light-primary.png"> <img src="readme-assets/EmeraldLock-dark-primary.png">
 </p>
 <p align="center">
-  <img src="readme-assets/EmeraldLock-dark-danger.PNG"> 
+  <img src="readme-assets/EmeraldLock-dark-danger.png"> 
 </p>
 
 ### What it offers
@@ -47,9 +47,9 @@ For now, the app is available only for Windows, but in the future you should be 
 
 <ul>
   <li> Microsoft Windows Installer package:
-    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.3.0/emerald-lock-1.3.0.msi"> Emerald Lock.msi </a>
+    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.4.0/emerald-lock-1.4.0.msi"> Emerald Lock.msi </a>
   </li>
   <li> Exe setup: 
-    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.3.0/emerald-lock-setup-1.3.0.exe"> Emerald Lock.exe </a>
+    <a href="https://github.com/xylish7/emerald-lock/releases/download/v1.4.0/emerald-lock-setup-1.4.0.exe"> Emerald Lock.exe </a>
   </li>
 </ul>

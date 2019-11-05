@@ -31,7 +31,7 @@ type Props = {
   disabled?: boolean
 };
 
-export default function Checkbox({
+export default function CheckRadio({
   name,
   label,
   checked,
@@ -72,7 +72,7 @@ export default function Checkbox({
   );
 }
 
-Checkbox.propTypes = {
+CheckRadio.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   checked: PropTypes.bool,
@@ -89,7 +89,7 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool
 };
 
-Checkbox.defaultProps = {
+CheckRadio.defaultProps = {
   label: undefined,
   checked: undefined,
   className: undefined,

@@ -5,6 +5,7 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 @import '~react-bulma-components/dist/react-bulma-components.min.css';
 @import '~bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.min.css';
+@import '~bulma-extensions/bulma-slider/dist/css/bulma-slider.min.css';
 
 @font-face {
   font-family: titleFont;
@@ -23,8 +24,4 @@
 
 html {
   overflow: hidden;
-}
-
-body {
-  width: 260px;
 }

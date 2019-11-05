@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router';
 import routes from './constants/routes';
 import App from './containers/App';
-import HomePage from './containers/HomePage';
+import PasswordGenerator from './containers/PasswordGenerator';
 import { getThemeMode, getThemeColor } from './actions/menu';
 
 type Props = {
@@ -24,7 +24,7 @@ function Routes(props: Props) {
   return (
     <App>
       <Switch>
-        <Route path={routes.HOME} component={HomePage} />
+        <Route path={routes.HOME} component={PasswordGenerator} />
       </Switch>
     </App>
   );

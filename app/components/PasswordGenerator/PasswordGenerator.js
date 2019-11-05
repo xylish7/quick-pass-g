@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { clipboard } from 'electron';
 
+import 'bulma-extensions/bulma-slider/dist/js/bulma-slider';
+import 'bulma-extensions/bulma-slider/dist/css/bulma-slider.min.css';
 import { Button, Columns, Form, Icon } from 'react-bulma-components';
-import styles from './Home.css';
+import styles from './PasswordGenerator.css';
 
 import generatePassword from '../../utils/generate-password';
 
-import Checkbox from '../../ui_components/Checkbox';
+import CheckRadio from '../../ui_components/CheckRadio';
 import Menu from '../../containers/Menu';
 import type { MenuState } from '../../reducers/menu';
 
@@ -135,25 +137,29 @@ function Home(props: Props) {
       {/* Length of the password + checkboxes */}
       <div className={styles.passwordOptions}>
         {/* Password Length */}
-        <div className="columns is-mobile" style={{ marginBottom: 0 }}>
-          <Columns.Column>
-            <p className={styles.passLength}>Length:</p>
-          </Columns.Column>
-          <Columns.Column className="is-three-quarters">
-            <Form.Control className={styles.passLengthInput}>
-              <Form.Input
-                size="small"
-                type="number"
-                value={passLength}
-                min="8"
-                max="20"
-                onChange={e => setPassLength(e.target.value)}
-              />
-            </Form.Control>
-          </Columns.Column>
-        </div>
+        <p className={styles.passLength}>Length:</p>
+        <input
+          id="sliderWithValue"
+          className={`slider has-output is-fullwidth is-${
+            props.menu.themeColor
+          }`}
+          step="1"
+          min="0"
+          max="20"
+          value={passLength}
+          type="range"
+          onChange={e => setPassLength(e.target.value)}
+        />
+        <output
+          className={styles.passwordOutput}
+          style={{ top: '7px' }}
+          htmlFor="sliderWithValue"
+        >
+          {passLength}
+        </output>
+
         {/* Upper case */}
-        <Checkbox
+        <CheckRadio
           type="checkbox"
           color={props.menu.themeColor}
           size="small"
@@ -163,7 +169,7 @@ function Home(props: Props) {
           onClick={onCheckboxClick}
         />
         {/* Lower case */}
-        <Checkbox
+        <CheckRadio
           type="checkbox"
           color={props.menu.themeColor}
           size="small"
@@ -173,7 +179,7 @@ function Home(props: Props) {
           onClick={onCheckboxClick}
         />
         {/* Digits */}
-        <Checkbox
+        <CheckRadio
           type="checkbox"
           color={props.menu.themeColor}
           size="small"
@@ -183,7 +189,7 @@ function Home(props: Props) {
           onClick={onCheckboxClick}
         />
         {/* Special characters */}
-        <Checkbox
+        <CheckRadio
           type="checkbox"
           color={props.menu.themeColor}
           size="small"

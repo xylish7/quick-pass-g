@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Home from '../components/Home/Home';
+import PasswordGenerator from '../components/PasswordGenerator/PasswordGenerator';
 
 type Props = {};
 
@@ -14,4 +14,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(Home);
+)(PasswordGenerator);
