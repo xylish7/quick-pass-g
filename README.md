@@ -4,9 +4,6 @@
 <p align="center">
   <img src="readme-assets/EmeraldLock-name.png"> 
 </p>
-<hr>
-
-<p> A simple, nice looking 👌, password generator 🔐, which takes care of generating your passwords for you :point_down:.</p>
 
 <p align="center">
   <img src="readme-assets/EmeraldLock-light-primary.png"> <img src="readme-assets/EmeraldLock-dark-primary.png">
