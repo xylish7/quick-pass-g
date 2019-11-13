@@ -13,15 +13,71 @@
 }
 
 [data-theme='dark'] {
-  --font-color: #e1e1ff;
-  --bg-color: #212121;
+  /* .container-after-titlebar */
+  --container-after-titlebar-font-color: #fff;
+  --container-after-titlebar-bg-color: #212121;
+
+  /* .add-vault-button */
+  --add-vault-button-bg-hover: hsl(0, 0%, 18%);
+  --add-vault-button-bg-active: hsl(0, 0%, 14%);
+  --add-vault-button-color: hsl(0, 0%, 48%);
+}
+
+[data-theme='light'] {
+  /* .container-after-titlebar */
+  --container-after-titlebar-font-color: #000;
+  --container-after-titlebar-bg-color: hsl(0, 0%, 98%);
+
+  /* .add-vault-button */
+  --add-vault-button-bg-hover: hsl(0, 0%, 90%);
+  --add-vault-button-bg-active: hsl(0, 0%, 93%);
+  --add-vault-button-color: hsl(0, 0%, 71%);
 }
 
 .container-after-titlebar {
-  background-color: var(--bg-color);
-  color: var(--font-color);
+  background-color: var(--container-after-titlebar-bg-color);
+  color: var(--container-after-titlebar-font-color);
 }
 
 html {
   overflow: hidden;
+}
+
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+*:focus {
+  outline: none;
+  border-color: none;
+}
+
+/* Add vault button */
+.add-vault-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border: 1.5px solid;
+  margin: 6px auto;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--add-vault-button-color);
+}
+
+.add-vault-button:hover {
+  background-color: var(--add-vault-button-bg-hover);
+}
+
+.add-vault-button:active {
+  background-color: var(--add-vault-button-bg-active);
+}
+
+.add-vault-button > i {
+  font-size: 24px;
 }

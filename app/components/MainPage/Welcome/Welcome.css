@@ -1,0 +1,39 @@
+.container {
+  margin: auto;
+}
+
+.title {
+  font-family: titleFont, sans-serif;
+  font-size: 7vw;
+}
+
+.appIcon {
+  display: block;
+  margin: auto;
+  width: 10vw;
+  height: auto;
+  margin-bottom: 60px;
+}
+
+@media only screen and (min-width: 1110px) {
+  .title {
+    font-size: 77px;
+  }
+  .appIcon {
+    width: 110px;
+  }
+}
+
+.welcomeText {
+  font-size: 1.8vw;
+}
+
+.buttonsGroup {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+}
+
+.button {
+  margin-right: 30px;
+}

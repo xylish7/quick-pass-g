@@ -1,11 +1,14 @@
 // @flow
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import * as customTitlebar from 'custom-electron-titlebar';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router';
+
 import routes from './constants/routes';
+import appIcon from '../resources/icons/64x64.png';
 import App from './containers/App';
-import PasswordGenerator from './containers/PasswordGenerator';
+import MainPage from './containers/MainPage';
 import { getThemeMode, getThemeColor } from './actions/menu';
 
 type Props = {
@@ -19,12 +22,23 @@ function Routes(props: Props) {
   useEffect(() => {
     props.getThemeMode();
     props.getThemeColor();
+
+    // Set custom titlebar
+    const titlebar = new customTitlebar.Titlebar({
+      backgroundColor: customTitlebar.Color.fromHex('#444'),
+      icon: appIcon
+      // maximizable: false
+    });
+
+    return () => {
+      titlebar.dispose();
+    };
   }, []);
 
   return (
     <App>
       <Switch>
-        <Route path={routes.HOME} component={PasswordGenerator} />
+        <Route path={routes.HOME} component={MainPage} />
       </Switch>
     </App>
   );

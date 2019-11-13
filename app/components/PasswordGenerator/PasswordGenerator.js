@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { clipboard } from 'electron';
 
-import 'bulma-extensions/bulma-slider/dist/js/bulma-slider';
-import 'bulma-extensions/bulma-slider/dist/css/bulma-slider.min.css';
 import { Button, Columns, Form, Icon } from 'react-bulma-components';
 import styles from './PasswordGenerator.css';
 
