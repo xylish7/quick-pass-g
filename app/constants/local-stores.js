@@ -11,3 +11,15 @@ export const USER_PREFERENCES = {
     themeColor: 'themeColor'
   }
 };
+
+export const USER_VAULTS = {
+  store: {
+    configName: 'user-vaults',
+    defaults: {
+      pathsToVaults: []
+    }
+  },
+  values: {
+    pathsToVaults: 'pathsToVaults'
+  }
+};

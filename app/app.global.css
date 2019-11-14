@@ -12,25 +12,57 @@
   src: url('assets/fonts/trench.ttf');
 }
 
+:root {
+  --black: #000000;
+  --black-light: hsl(0, 0%, 14%);
+  --black-lighter: hsl(0, 0%, 18%);
+
+  --grey: hsl(0, 0%, 50%);
+
+  --white: #ffffff;
+  --white-dark: hsl(0, 0%, 98%);
+  --white-darker: hsl(0, 0%, 94%);
+}
+
 [data-theme='dark'] {
   /* .container-after-titlebar */
-  --container-after-titlebar-font-color: #fff;
-  --container-after-titlebar-bg-color: #212121;
+  --container-after-titlebar-font-color: var(--white);
+  --container-after-titlebar-bg-color: var(--black-light);
+
+  /* .title */
+  --title-color: var(--white);
+
+  /* .label */
+  --label-color: var(--white);
+
+  /* .box */
+  --box-bg-color: var(--black-light);
+
+  /* .input */
+  --input-color: var(--white);
+  --input-bg-color: var(--black-lighter);
+  --input-placeholder-color: hsl(0, 0%, 40%);
 
   /* .add-vault-button */
-  --add-vault-button-bg-hover: hsl(0, 0%, 18%);
-  --add-vault-button-bg-active: hsl(0, 0%, 14%);
+  --add-vault-button-bg-hover: var(--black-lighter);
+  --add-vault-button-bg-active: var(--black-light);
   --add-vault-button-color: hsl(0, 0%, 48%);
 }
 
 [data-theme='light'] {
   /* .container-after-titlebar */
-  --container-after-titlebar-font-color: #000;
-  --container-after-titlebar-bg-color: hsl(0, 0%, 98%);
+  --container-after-titlebar-font-color: var(--black);
+  --container-after-titlebar-bg-color: var(--white-dark);
+
+  /* .box */
+  --box-bg-color: var(--white-dark);
+
+  /* .input */
+  --input-placeholder-color: hsl(0, 0%, 80%);
 
   /* .add-vault-button */
-  --add-vault-button-bg-hover: hsl(0, 0%, 90%);
-  --add-vault-button-bg-active: hsl(0, 0%, 93%);
+  --add-vault-button-bg-hover: var(--white-darker);
+  --add-vault-button-bg-active: var(--white-dark);
   --add-vault-button-color: hsl(0, 0%, 71%);
 }
 
@@ -54,6 +86,31 @@ body {
 *:focus {
   outline: none;
   border-color: none;
+}
+
+/* Text */
+.title {
+  color: var(--title-color);
+}
+
+/* Label */
+.label {
+  color: var(--label-color);
+}
+
+/* Box */
+.box {
+  background-color: var(--box-bg-color);
+}
+
+/* Input */
+.input {
+  color: var(--input-color);
+  background-color: var(--input-bg-color);
+}
+
+.input::placeholder {
+  color: var(--input-placeholder-color);
 }
 
 /* Add vault button */

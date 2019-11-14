@@ -237,6 +237,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
     "bulma-extensions": "6.0.0",
+    "buttercup": "^2.16.1",
     "custom-electron-titlebar": "^3.1.0",
     "devtron": "^1.4.0",
     "electron-debug": "^2.0.0",

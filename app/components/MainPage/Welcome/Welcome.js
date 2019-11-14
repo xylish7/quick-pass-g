@@ -1,26 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { remote } from 'electron';
 import type { ThemeMode } from '../../../actions/menu';
+import { Archive, Datasources, Credentials } from 'buttercup';
 
 import styles from './Welcome.css';
 
-import { Button } from 'react-bulma-components';
+import { Button, Modal, Section } from 'react-bulma-components';
 import appIcon from '../../../../resources/icons/256x256.png';
+
+import CreatePassword from '../../../ui_components/CreatePassword/CreatePassword';
 
 type Props = {
   themeMode: ThemeMode
 };
 
 function Welcome(props: Props) {
-  const createNewVault = (): void => {
+  const [pathToVault, setPathToVault] = useState(undefined);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+
+  /**
+   * Get the path to where the vault should be created
+   */
+  const getVaultPath = (): void => {
     const pathToVault: string = remote.dialog.showSaveDialog();
-    console.log('TCL: createNewVault -> pathToVault', pathToVault);
+
+    if (pathToVault) {
+      setPathToVault(pathToVault);
+      setShowPasswordModal(true);
+    } else setPathToVault(undefined);
+  };
+
+  /**
+   * When the modal with the password creation is closed
+   * check to see if there was a [password] provided. If
+   * [password] exists then create the vault to the
+   * selected path.
+   *
+   * @param {string} password
+   */
+  const handleModalClose = (password: string): void => {
+    setShowPasswordModal(false);
+    if (password) {
+      const { FileDatasource } = Datasources;
+
+      const fileDatasource = new FileDatasource(pathToVault);
+      const archive = Archive.createWithDefaults();
+      const credentials = Credentials.fromPassword(password);
+      fileDatasource.save(archive.getHistory(), credentials);
+    }
   };
 
   return (
     <div className={styles.container}>
+      <CreatePassword
+        show={showPasswordModal}
+        onClose={handleModalClose}
+        modal={{ closeOnBlur: true, showClose: false }}
+      />
       {/* Title */}
       <h1 className={`has-text-primary ${styles.title}`} align="center">
         Emerald Lock
@@ -53,7 +91,7 @@ function Welcome(props: Props) {
           className={styles.button}
           rounded
           color="primary"
-          onClick={createNewVault}
+          onClick={getVaultPath}
         >
           <span className="icon">
             <i className="fas fa-plus" />
