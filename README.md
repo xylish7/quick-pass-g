@@ -6,10 +6,10 @@
 </p>
 
 <p align="center">
-  <img src="readme-assets/EmeraldLock-light-primary.png"> <img src="readme-assets/EmeraldLock-dark-primary.png">
+  <img src="readme-assets/EmeraldLock-light-primary.PNG"> <img src="readme-assets/EmeraldLock-dark-primary.PNG">
 </p>
 <p align="center">
-  <img src="readme-assets/EmeraldLock-dark-danger.png"> 
+  <img src="readme-assets/EmeraldLock-dark-danger.PNG"> 
 </p>
 
 ### What it offers
