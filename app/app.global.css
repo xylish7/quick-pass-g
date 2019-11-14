@@ -12,6 +12,14 @@
   src: url('assets/fonts/trench.ttf');
 }
 
+* {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 :root {
   --black: #000000;
   --black-light: hsl(0, 0%, 14%);
@@ -47,6 +55,9 @@
   --add-vault-button-bg-hover: var(--black-lighter);
   --add-vault-button-bg-active: var(--black-light);
   --add-vault-button-color: hsl(0, 0%, 48%);
+
+  /* .open-vault-button */
+  --open-vault-button-color: var(--white-darker);
 }
 
 [data-theme='light'] {
@@ -136,5 +147,31 @@ body {
 }
 
 .add-vault-button > i {
+  font-size: 24px;
+}
+
+/* Open vault button */
+.open-vault-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border: 1.5px solid;
+  margin: 6px auto;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--open-vault-button-color);
+}
+
+.open-vault-button:hover {
+  background-color: var(--add-vault-button-bg-hover);
+}
+
+.open-vault-button:active {
+  background-color: var(--add-vault-button-bg-active);
+}
+
+.open-vault-button > i {
   font-size: 24px;
 }

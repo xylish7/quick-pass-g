@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { remote } from 'electron';
 import type { ThemeMode } from '../../../actions/menu';
+import type { Vault } from '../../../actions/vault';
 import { Archive, Datasources, Credentials } from 'buttercup';
 
 import styles from './Welcome.css';
@@ -11,9 +11,12 @@ import { Button, Modal, Section } from 'react-bulma-components';
 import appIcon from '../../../../resources/icons/256x256.png';
 
 import CreatePassword from '../../../ui_components/CreatePassword/CreatePassword';
+import { setVault } from '../../../actions/vault';
 
 type Props = {
-  themeMode: ThemeMode
+  vaults: Array<Vault>,
+  themeMode: ThemeMode,
+  setVault: (vaultPath: string) => void
 };
 
 function Welcome(props: Props) {
@@ -24,10 +27,10 @@ function Welcome(props: Props) {
    * Get the path to where the vault should be created
    */
   const getVaultPath = (): void => {
-    const pathToVault: string = remote.dialog.showSaveDialog();
+    const path: string = remote.dialog.showSaveDialog();
 
-    if (pathToVault) {
-      setPathToVault(pathToVault);
+    if (path) {
+      setPathToVault(path);
       setShowPasswordModal(true);
     } else setPathToVault(undefined);
   };
@@ -42,6 +45,7 @@ function Welcome(props: Props) {
    */
   const handleModalClose = (password: string): void => {
     setShowPasswordModal(false);
+
     if (password) {
       const { FileDatasource } = Datasources;
 
@@ -49,28 +53,14 @@ function Welcome(props: Props) {
       const archive = Archive.createWithDefaults();
       const credentials = Credentials.fromPassword(password);
       fileDatasource.save(archive.getHistory(), credentials);
+
+      props.setVault(pathToVault);
     }
   };
 
-  return (
-    <div className={styles.container}>
-      <CreatePassword
-        show={showPasswordModal}
-        onClose={handleModalClose}
-        modal={{ closeOnBlur: true, showClose: false }}
-      />
-      {/* Title */}
-      <h1 className={`has-text-primary ${styles.title}`} align="center">
-        Emerald Lock
-      </h1>
-
-      {/* App icon */}
-      <img className={styles.appIcon} src={appIcon} />
-
-      {/* Welcome text */}
-      <p className={`has-text-grey-light ${styles.welcomeText}`} align="center">
-        Welcome to your cool emerald password keeper
-      </p>
+  const _renderWelcomeMessage = (
+    <div>
+      {/* No vault created message */}
       <p className={`has-text-grey-light ${styles.welcomeText}`} align="center">
         It seems like you don't have any emerald vaults at this time
       </p>
@@ -101,14 +91,32 @@ function Welcome(props: Props) {
       </div>
     </div>
   );
+
+  return (
+    <div className={styles.container}>
+      <CreatePassword
+        show={showPasswordModal}
+        onClose={handleModalClose}
+        modal={{ closeOnBlur: true, showClose: false }}
+      />
+      {/* Title */}
+      <h1 className={`has-text-primary ${styles.title}`} align="center">
+        Emerald Lock
+      </h1>
+
+      {/* App icon */}
+      <img className={styles.appIcon} src={appIcon} />
+      {/* Welcome text */}
+      <p className={`has-text-grey-light ${styles.welcomeText}`} align="center">
+        Welcome to your cool emerald password keeper
+      </p>
+      {props.vaults.length > 0 && _renderWelcomeMessage}
+    </div>
+  );
 }
 
 Welcome.propTypes = {
   themeMode: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({
-  themeMode: state.menu.themeMode
-});
-
-export default connect(mapStateToProps)(Welcome);
+export default Welcome;

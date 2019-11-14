@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import MainPage from '../components/MainPage/MainPage';
 
 const mapStateToProps = state => ({
-  themeMode: state.menu.themeMode
+  vaults: state.vault.vaults
 });
 
 export default connect(mapStateToProps)(MainPage);

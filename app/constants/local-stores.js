@@ -16,10 +16,10 @@ export const USER_VAULTS = {
   store: {
     configName: 'user-vaults',
     defaults: {
-      pathsToVaults: []
+      vaults: []
     }
   },
   values: {
-    pathsToVaults: 'pathsToVaults'
+    vaults: 'vaults'
   }
 };

@@ -3,13 +3,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import type { ThemeMode } from '../../actions/menu';
+import type { Vault } from '../../actions/vault';
 
 import styles from './VaultsContainer.css';
 
 import AddVaultButton from '../AddVaultButton/AddVaultButton';
+import OpenVaultButton from '../OpenVaultButton/OpenVaultButton';
 
 type Props = {
-  themeMode: ThemeMode
+  themeMode: ThemeMode,
+  vaults: Array<Vault>
 };
 
 function VaultsContainer(props: Props) {
@@ -21,6 +24,10 @@ function VaultsContainer(props: Props) {
           : 'has-background-grey-darker'
       } ${styles.vaultsContainer}`}
     >
+      {props.vaults.map((vault: Vault, index: number) => (
+        <OpenVaultButton key={index} />
+      ))}
+
       <AddVaultButton />
     </div>
   );
@@ -31,7 +38,8 @@ VaultsContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  themeMode: state.menu.themeMode
+  themeMode: state.menu.themeMode,
+  vaults: state.vault.vaults
 });
 
 export default connect(mapStateToProps)(VaultsContainer);

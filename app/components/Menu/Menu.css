@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 .menuToggle .fas {
-  font-size: 18px;
+  font-size: 25px;
   display: table-cell;
   vertical-align: middle;
   transition: 0.4s;

@@ -84,7 +84,7 @@ function Menu(props: Props) {
         style={{ backgroundColor: menuToggleBackground }}
         className={`${styles.menuToggle} ${open ? styles.open : null} `}
       >
-        <span className={`${styles.fas} fas fa-plus`} />
+        <span className={`${styles.fas} fas fa-cog`} />
       </div>
 
       <div className={`${styles.menuRound} ${open ? styles.open : null} `}>

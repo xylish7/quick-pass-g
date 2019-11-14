@@ -10,10 +10,12 @@ import appIcon from '../resources/icons/64x64.png';
 import App from './containers/App';
 import MainPage from './containers/MainPage';
 import { getThemeMode, getThemeColor } from './actions/menu';
+import { getVaults } from './actions/vault';
 
 type Props = {
   getThemeMode: () => void,
-  getThemeColor: () => void
+  getThemeColor: () => void,
+  getVaults: () => void
 };
 
 function Routes(props: Props) {
@@ -22,6 +24,7 @@ function Routes(props: Props) {
   useEffect(() => {
     props.getThemeMode();
     props.getThemeColor();
+    props.getVaults();
 
     // Set custom titlebar
     const titlebar = new customTitlebar.Titlebar({
@@ -46,12 +49,14 @@ function Routes(props: Props) {
 
 Routes.propTypes = {
   getThemeMode: PropTypes.func.isRequired,
-  getThemeColor: PropTypes.func.isRequired
+  getThemeColor: PropTypes.func.isRequired,
+  getVaults: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
   getThemeMode: () => dispatch(getThemeMode()),
-  getThemeColor: () => dispatch(getThemeColor())
+  getThemeColor: () => dispatch(getThemeColor()),
+  getVaults: () => dispatch(getVaults())
 });
 
 export default connect(

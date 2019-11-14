@@ -66,16 +66,14 @@ function CreatePassword(props: Props) {
     <div>
       <Modal
         show={props.show}
-        onClose={() => props.onClose(undefined)}
+        onClose={() => {
+          props.onClose(undefined);
+          clearInputs();
+        }}
         {...props.modal}
       >
-        <Modal.Content>
-          <Box
-            style={{
-              width: 500,
-              margin: 'auto'
-            }}
-          >
+        <Modal.Content className={styles.modalContent}>
+          <Box className={styles.box}>
             <h1 className="title" align="center">
               New Password
             </h1>
@@ -85,7 +83,7 @@ function CreatePassword(props: Props) {
               <Form.Control>
                 <Form.Input
                   color={props.themeColor}
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="Password"
                   value={inputs.password}
@@ -99,7 +97,7 @@ function CreatePassword(props: Props) {
               <Form.Control>
                 <Form.Input
                   color={props.themeColor}
-                  type="text"
+                  type="password"
                   name="confirmPassword"
                   placeholder="Confirm password"
                   value={inputs.confirmPassword}
