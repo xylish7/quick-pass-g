@@ -6,7 +6,7 @@ import type { Vault } from '../../actions/vault';
 import styles from './MainPage.css';
 
 import Menu from '../../containers/Menu';
-import VaultsContainer from '../../ui_components/VaultsContainer/VaultsContainer';
+import VaultsContainer from './VaultsContainer/VaultsContainer';
 import Welcome from '../../containers/Welcome';
 
 type Props = {
@@ -14,10 +14,12 @@ type Props = {
 };
 
 function MainPage(props: Props) {
+  const { vaults } = props;
+
   return (
     <React.Fragment>
       <div className={styles.root}>
-        {props.vaults.length > 0 && <VaultsContainer />}
+        {vaults.length > 0 && <VaultsContainer />}
         <Welcome />
       </div>
       <Menu />

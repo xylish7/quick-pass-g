@@ -1,5 +1,5 @@
 // @flow
-import type { GetState, Dispatch } from '../reducers/types';
+import type { Dispatch } from '../reducers/types';
 import { USER_PREFERENCES } from '../constants/local-stores';
 import LocalStore from '../utils/local-store';
 

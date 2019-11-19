@@ -6,11 +6,9 @@
  * @param {Object} oldObject the old object
  * @param {Object} updatedProperties properties to be updated
  */
-const updateObject = (oldObject: Object, updatedProperties: Object): Object => {
-  return {
+const updateObject = (oldObject: Object, updatedProperties: Object): Object => ({
     ...oldObject,
     ...updatedProperties
-  };
-};
+  });
 
 export default updateObject;

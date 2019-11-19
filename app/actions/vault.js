@@ -1,6 +1,6 @@
 // @flow
 import fs from 'fs';
-import type { GetState, Dispatch } from '../reducers/types';
+import type { Dispatch } from '../reducers/types';
 import { USER_VAULTS } from '../constants/local-stores';
 import LocalStore from '../utils/local-store';
 
@@ -24,20 +24,24 @@ export const setVault = (vaultPath: string) => (dispatch: Dispatch): void => {
   // Get already stored vaults
   const vaults: Array<Vault> = userVaultsStore.get(USER_VAULTS.values.vaults);
 
-  const newVault: Vault = {
-    name: vaultPath.slice(vaultPath.lastIndexOf('\\') + 1, vaultPath.length),
-    path: vaultPath
-  };
+  // Add vault only if it's not already added
+  if (vaults.filter(vault => vault.path === vaultPath).length === 0) {
+    // Create vault object
+    const newVault: Vault = {
+      name: vaultPath.slice(vaultPath.lastIndexOf('\\') + 1, vaultPath.length),
+      path: vaultPath
+    };
 
-  vaults.push(newVault);
+    vaults.push(newVault);
 
-  // Save the vault to the store
-  userVaultsStore.set(USER_VAULTS.values.vaults, vaults);
+    // Save the vault to the store
+    userVaultsStore.set(USER_VAULTS.values.vaults, vaults);
 
-  dispatch({
-    type: SET_VAULT,
-    vaults
-  });
+    dispatch({
+      type: SET_VAULT,
+      vaults
+    });
+  }
 };
 
 /**

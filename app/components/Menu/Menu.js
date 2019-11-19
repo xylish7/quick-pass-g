@@ -13,6 +13,8 @@ type Props = {
 };
 
 function Menu(props: Props) {
+  const { menu, setThemeColor, setThemeMode } = props;
+
   const containerRef = useRef(null);
   const [open: boolean, setOpen] = useState(false);
 
@@ -40,8 +42,8 @@ function Menu(props: Props) {
    *
    * @param {ThemeMode} themeMode
    */
-  const setThemeMode = (themeMode: ThemeMode): void => {
-    props.setThemeMode(themeMode);
+  const onSetThemeMode = (themeMode: ThemeMode): void => {
+    setThemeMode(themeMode);
 
     setOpen(false);
   };
@@ -51,8 +53,8 @@ function Menu(props: Props) {
    *
    * @param {ThemeColor} themeColor
    */
-  const setThemeColor = (themeColor: ThemeColor): void => {
-    props.setThemeColor(themeColor);
+  const onSetThemeColor = (themeColor: ThemeColor): void => {
+    setThemeColor(themeColor);
 
     setOpen(false);
   };
@@ -60,7 +62,7 @@ function Menu(props: Props) {
   // Custom style of the menu togle button dependet of the
   // [themeColor] prop
   let menuToggleBackground: string;
-  switch (props.menu.themeColor) {
+  switch (menu.themeColor) {
     case 'primary':
       menuToggleBackground = 'rgb(0, 209, 178)';
       break;
@@ -88,18 +90,21 @@ function Menu(props: Props) {
       </div>
 
       <div className={`${styles.menuRound} ${open ? styles.open : null} `}>
-        <div className={styles.btnApp} onClick={() => setThemeColor('primary')}>
+        <div
+          className={styles.btnApp}
+          onClick={() => onSetThemeColor('primary')}
+        >
           <i className={`${styles.far} has-text-primary fas fa-tint`} />
         </div>
-        <div className={styles.btnApp} onClick={() => setThemeMode('dark')}>
-          {props.menu.themeMode === 'light' ? (
+        <div className={styles.btnApp} onClick={() => onSetThemeMode('dark')}>
+          {menu.themeMode === 'light' ? (
             <i className={`${styles.far} has-text-warning far fa-moon`} />
           ) : (
             <i className={`${styles.fas} has-text-warning fas fa-moon`} />
           )}
         </div>
-        <div className={styles.btnApp} onClick={() => setThemeMode('light')}>
-          {props.menu.themeMode === 'light' ? (
+        <div className={styles.btnApp} onClick={() => onSetThemeMode('light')}>
+          {menu.themeMode === 'light' ? (
             <i className={`${styles.fas} has-text-warning fas fa-sun`} />
           ) : (
             <i className={`${styles.far} has-text-warning far fa-sun`} />
@@ -108,13 +113,19 @@ function Menu(props: Props) {
       </div>
 
       <div className={`${styles.menuLine} ${open ? styles.open : null} `}>
-        <div className={styles.btnApp} onClick={() => setThemeColor('info')}>
+        <div className={styles.btnApp} onClick={() => onSetThemeColor('info')}>
           <i className={`${styles.fas} has-text-info fas fa-tint`} />
         </div>
-        <div className={styles.btnApp} onClick={() => setThemeColor('warning')}>
+        <div
+          className={styles.btnApp}
+          onClick={() => onSetThemeColor('warning')}
+        >
           <i className={`${styles.fas} has-text-warning fas fa-tint`} />
         </div>
-        <div className={styles.btnApp} onClick={() => setThemeColor('danger')}>
+        <div
+          className={styles.btnApp}
+          onClick={() => onSetThemeColor('danger')}
+        >
           <i className={`${styles.fas} has-text-danger fas fa-tint`} />
         </div>
       </div>

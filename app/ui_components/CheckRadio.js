@@ -24,7 +24,7 @@ type Props = {
   color?: string,
   type?: string,
   look?: string,
-  borderless?: Boolean,
+  borderless?: boolean,
   background?: boolean,
   rightToLeft?: boolean,
   size?: string,

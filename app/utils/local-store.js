@@ -8,6 +8,7 @@ const fs = require('fs');
  */
 class LocalStore {
   path: string;
+
   data: Object;
 
   constructor(opts: Object) {
@@ -17,7 +18,7 @@ class LocalStore {
     );
 
     // Set the name of the file using [configName] parameter
-    this.path = path.join(userDataPath, opts.configName + '.json');
+    this.path = path.join(userDataPath, `${opts.configName  }.json`);
 
     this.data = parseDataFile(this.path, opts.defaults);
   }

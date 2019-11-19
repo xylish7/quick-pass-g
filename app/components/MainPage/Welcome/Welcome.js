@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { remote } from 'electron';
+import { Button } from 'react-bulma-components';
 import type { ThemeMode } from '../../../actions/menu';
 import type { Vault } from '../../../actions/vault';
-import { Archive, Datasources, Credentials } from 'buttercup';
 
 import styles from './Welcome.css';
 
-import { Button, Modal, Section } from 'react-bulma-components';
 import appIcon from '../../../../resources/icons/256x256.png';
 
-import CreatePassword from '../../../ui_components/CreatePassword/CreatePassword';
-import { setVault } from '../../../actions/vault';
+import CreateVaultModal from '../../../ui_components/CreateVaultModal/CreateVaultModal';
 
 type Props = {
   vaults: Array<Vault>,
@@ -20,45 +18,36 @@ type Props = {
 };
 
 function Welcome(props: Props) {
+  const { vaults, themeMode, setVault } = props;
+
   const [pathToVault, setPathToVault] = useState(undefined);
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showCreateVaultModal, setShowCreateVaultModal] = useState(false);
 
   /**
    * Get the path to where the vault should be created
    */
-  const getVaultPath = (): void => {
+  const createVaultPath = (): void => {
     const path: string = remote.dialog.showSaveDialog();
 
     if (path) {
       setPathToVault(path);
-      setShowPasswordModal(true);
+      // Open the modal to enter the password for the vault wich
+      // will be created
+      setShowCreateVaultModal(true);
     } else setPathToVault(undefined);
   };
 
   /**
-   * When the modal with the password creation is closed
-   * check to see if there was a [password] provided. If
-   * [password] exists then create the vault to the
-   * selected path.
-   *
-   * @param {string} password
+   * Open an alredy created vault
    */
-  const handleModalClose = (password: string): void => {
-    setShowPasswordModal(false);
-
-    if (password) {
-      const { FileDatasource } = Datasources;
-
-      const fileDatasource = new FileDatasource(pathToVault);
-      const archive = Archive.createWithDefaults();
-      const credentials = Credentials.fromPassword(password);
-      fileDatasource.save(archive.getHistory(), credentials);
-
-      props.setVault(pathToVault);
+  const openVaultPath = (): void => {
+    const path: Array<string> = remote.dialog.showOpenDialog();
+    if (path) {
+      setVault(path[0]);
     }
   };
 
-  const _renderWelcomeMessage = (
+  const renderWelcomeMessage = (
     <div>
       {/* No vault created message */}
       <p className={`has-text-grey-light ${styles.welcomeText}`} align="center">
@@ -70,7 +59,8 @@ function Welcome(props: Props) {
         <Button
           className={styles.button}
           rounded
-          color={props.themeMode === 'light' ? 'light' : 'dark'}
+          color={themeMode === 'light' ? 'light' : 'dark'}
+          onClick={openVaultPath}
         >
           <span className="icon">
             <i className="fas fa-box-open" />
@@ -81,7 +71,7 @@ function Welcome(props: Props) {
           className={styles.button}
           rounded
           color="primary"
-          onClick={getVaultPath}
+          onClick={createVaultPath}
         >
           <span className="icon">
             <i className="fas fa-plus" />
@@ -94,10 +84,10 @@ function Welcome(props: Props) {
 
   return (
     <div className={styles.container}>
-      <CreatePassword
-        show={showPasswordModal}
-        onClose={handleModalClose}
-        modal={{ closeOnBlur: true, showClose: false }}
+      <CreateVaultModal
+        pathToVault={pathToVault}
+        show={showCreateVaultModal}
+        onClose={() => setShowCreateVaultModal(false)}
       />
       {/* Title */}
       <h1 className={`has-text-primary ${styles.title}`} align="center">
@@ -105,18 +95,19 @@ function Welcome(props: Props) {
       </h1>
 
       {/* App icon */}
-      <img className={styles.appIcon} src={appIcon} />
+      <img className={styles.appIcon} src={appIcon} alt="appIcon" />
       {/* Welcome text */}
       <p className={`has-text-grey-light ${styles.welcomeText}`} align="center">
         Welcome to your cool emerald password keeper
       </p>
-      {props.vaults.length > 0 && _renderWelcomeMessage}
+      {vaults.length === 0 && renderWelcomeMessage}
     </div>
   );
 }
 
 Welcome.propTypes = {
-  themeMode: PropTypes.string.isRequired
+  themeMode: PropTypes.string.isRequired,
+  setVault: PropTypes.func.isRequired
 };
 
 export default Welcome;

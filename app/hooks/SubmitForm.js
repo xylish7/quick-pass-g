@@ -19,8 +19,8 @@ const useSubmitForm = (initialValues, callback) => {
 
   const handleInputChange = event => {
     event.persist();
-    setInputs(inputs => ({
-      ...inputs,
+    setInputs(oldInputs => ({
+      ...oldInputs,
       [event.target.name]: event.target.value
     }));
   };

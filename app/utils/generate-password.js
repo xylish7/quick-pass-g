@@ -101,7 +101,7 @@ function generatePassword(
   }
 
   // Generate the password
-  for (let i = 0; i < length; i++)
+  for (let i = 0; i < length; i += 1)
     generatedPassword += generateRandomChar(typesArr, typesCount);
 
   const finalPassword: string = generatedPassword.slice(0, length);

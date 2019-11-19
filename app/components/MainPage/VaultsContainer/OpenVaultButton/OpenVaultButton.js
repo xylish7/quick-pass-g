@@ -2,9 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function OpenVaultButton(props) {
+type Props = {};
+
+function OpenVaultButton(props: Props) {
   return (
-    <div className="open-vault-button">
+    <div className="vault-button open-vault">
       <i className="fas fa-lock" />
     </div>
   );

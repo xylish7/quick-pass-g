@@ -23,12 +23,14 @@
 :root {
   --black: #000000;
   --black-light: hsl(0, 0%, 14%);
+  --black-light-intermediate: hsl(0, 0%, 16%);
   --black-lighter: hsl(0, 0%, 18%);
 
   --grey: hsl(0, 0%, 50%);
 
   --white: #ffffff;
   --white-dark: hsl(0, 0%, 98%);
+  --white-dark-intermediate: hsl(0, 0%, 96%);
   --white-darker: hsl(0, 0%, 94%);
 }
 
@@ -58,6 +60,10 @@
 
   /* .open-vault-button */
   --open-vault-button-color: var(--white-darker);
+
+  /* .grow-menu */
+  --grow-menu-bg: var(--black-lighter);
+  --grow-menu-list-item-bg-hover: var(--black-light-intermediate);
 }
 
 [data-theme='light'] {
@@ -75,11 +81,13 @@
   --add-vault-button-bg-hover: var(--white-darker);
   --add-vault-button-bg-active: var(--white-dark);
   --add-vault-button-color: hsl(0, 0%, 71%);
-}
 
-.container-after-titlebar {
-  background-color: var(--container-after-titlebar-bg-color);
-  color: var(--container-after-titlebar-font-color);
+  /* .open-vault-button */
+  --open-vault-button-color: var(--grey);
+
+  /* .grow-menu */
+  --grow-menu-bg: var(--white-darker);
+  --grow-menu-list-item-bg-hover: var(--white-dark-intermediate);
 }
 
 html {
@@ -124,8 +132,20 @@ body {
   color: var(--input-placeholder-color);
 }
 
-/* Add vault button */
-.add-vault-button {
+/*================================= 
+  custom-electron-titlebar
+===================================*/
+
+.container-after-titlebar {
+  overflow: hidden;
+  background-color: var(--container-after-titlebar-bg-color);
+  color: var(--container-after-titlebar-font-color);
+}
+
+/*================================= 
+  Vault button 
+===================================*/
+.vault-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,40 +158,82 @@ body {
   color: var(--add-vault-button-color);
 }
 
-.add-vault-button:hover {
+.vault-button:hover {
   background-color: var(--add-vault-button-bg-hover);
 }
 
-.add-vault-button:active {
+.vault-button:active {
   background-color: var(--add-vault-button-bg-active);
 }
 
-.add-vault-button > i {
+.vault-button > i {
   font-size: 24px;
+}
+
+/* Add vault button */
+.vault-button.add-vault {
+  color: var(--add-vault-button-color);
 }
 
 /* Open vault button */
-.open-vault-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 45px;
-  height: 45px;
-  border: 1.5px solid;
-  margin: 6px auto;
-  border-radius: 5px;
-  cursor: pointer;
+.vault-button.open-vault {
   color: var(--open-vault-button-color);
 }
 
-.open-vault-button:hover {
-  background-color: var(--add-vault-button-bg-hover);
+/*================================= 
+  Grow menu 
+===================================*/
+
+.grow-menu-list-item {
+  cursor: pointer;
+  padding: 5px 10px;
 }
 
-.open-vault-button:active {
-  background-color: var(--add-vault-button-bg-active);
+.grow-menu-list-item:hover {
+  background-color: var(--grow-menu-list-item-bg-hover);
+}
+.grow-menu-list-item:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
-.open-vault-button > i {
-  font-size: 24px;
+.grow-menu-list-item:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/*================================= 
+  Scrollbar
+===================================*/
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #bdbdbd;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(150, 149, 149);
+}
+
+/*================================= 
+  reactjs-popup
+===================================*/
+.popup-content {
+  background-color: var(--grow-menu-bg) !important;
+}
+
+.popup-arrow {
+  background-color: var(--grow-menu-bg) !important;
 }

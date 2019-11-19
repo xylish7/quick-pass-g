@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { clipboard } from 'electron';
 
-import { Button, Columns, Form, Icon } from 'react-bulma-components';
+import { Button, Form, Icon } from 'react-bulma-components';
 import styles from './PasswordGenerator.css';
 
 import generatePassword from '../../utils/generate-password';
@@ -24,6 +24,8 @@ type Props = {
 };
 
 function Home(props: Props) {
+  const { menu } = props;
+
   const [isCopied: boolean, setIsCopied] = useState(false);
   const [isChecked: boolean, setIsChecked] = useState(true);
   const [passLength: number, setPassLength] = useState(10);
@@ -103,7 +105,7 @@ function Home(props: Props) {
     <div className={styles.root}>
       <Menu />
       {/* Title */}
-      <h2 className={`has-text-${props.menu.themeColor} ${styles.title}`}>
+      <h2 className={`has-text-${menu.themeColor} ${styles.title}`}>
         Emerald Lock
       </h2>
 
@@ -113,7 +115,7 @@ function Home(props: Props) {
           <Form.Input type="text" value={password} readOnly />
 
           {!isChecked && (
-            <Form.Help color={props.menu.themeColor}>
+            <Form.Help color={menu.themeColor}>
               Please select one or more of the charsets below
             </Form.Help>
           )}
@@ -122,7 +124,7 @@ function Home(props: Props) {
         <Icon
           className={styles.clipboardIcon}
           style={{ height: 36, width: 40 }}
-          color={props.menu.themeColor}
+          color={menu.themeColor}
           onClick={copyToClipboard}
         >
           {isCopied ? (
@@ -138,9 +140,7 @@ function Home(props: Props) {
         <p className={styles.passLength}>Length:</p>
         <input
           id="sliderWithValue"
-          className={`slider has-output is-fullwidth is-${
-            props.menu.themeColor
-          }`}
+          className={`slider has-output is-fullwidth is-${menu.themeColor}`}
           step="1"
           min="0"
           max="20"
@@ -159,7 +159,7 @@ function Home(props: Props) {
         {/* Upper case */}
         <CheckRadio
           type="checkbox"
-          color={props.menu.themeColor}
+          color={menu.themeColor}
           size="small"
           name="upperCase"
           label="Upper-case (A, B, C, ...)"
@@ -169,7 +169,7 @@ function Home(props: Props) {
         {/* Lower case */}
         <CheckRadio
           type="checkbox"
-          color={props.menu.themeColor}
+          color={menu.themeColor}
           size="small"
           name="lowerCase"
           label="Lower-case (a, b, c, ...)"
@@ -179,7 +179,7 @@ function Home(props: Props) {
         {/* Digits */}
         <CheckRadio
           type="checkbox"
-          color={props.menu.themeColor}
+          color={menu.themeColor}
           size="small"
           name="digits"
           label="Digits (0, 1, 2, ...)"
@@ -189,7 +189,7 @@ function Home(props: Props) {
         {/* Special characters */}
         <CheckRadio
           type="checkbox"
-          color={props.menu.themeColor}
+          color={menu.themeColor}
           size="small"
           name="special"
           label="Special (!, $, %, ...)"
@@ -198,7 +198,7 @@ function Home(props: Props) {
         />
       </div>
       {/* Generate password button */}
-      <Button color={props.menu.themeColor} fullwidth onClick={generatePass}>
+      <Button color={menu.themeColor} fullwidth onClick={generatePass}>
         Generate password
       </Button>
     </div>
