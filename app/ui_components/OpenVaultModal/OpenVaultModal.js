@@ -8,26 +8,20 @@ import { Button, Modal, Form, Box } from 'react-bulma-components';
 import styles from './OpenVaultModal.css';
 
 import type { ThemeColor } from '../../actions/menu';
-import { getVaults } from '../../actions/vault';
+import type { VaultType } from '../../actions/valut';
+import { getVaults, openVault } from '../../actions/vault';
 
 type Props = {
   show: boolean,
   themeColor: ThemeColor,
-  pathToVault: string,
-  vaultName: string,
+  vault: VaultType,
   getVaults: () => void,
+  openVault: (vault, vaultId: string) => void,
   onClose: () => void
 };
 
 function OpenVaultModal(props: Props) {
-  const {
-    show,
-    themeColor,
-    pathToVault,
-    vaultName,
-    onClose,
-    getVaults
-  } = props;
+  const { show, themeColor, vault, onClose, getVaults, openVault } = props;
 
   const [error, setError] = useState({
     hasError: false,
@@ -35,6 +29,7 @@ function OpenVaultModal(props: Props) {
     errNo: 0
   });
   const [password, setPassword] = useState('');
+  const [openingVault, setOpeningVault] = useState(false);
 
   /**
    * Handle password input change
@@ -53,18 +48,21 @@ function OpenVaultModal(props: Props) {
   const handleOpenVault = (e): void => {
     e.preventDefault();
     const { FileDatasource } = Datasources;
-    const fileDatasource = new FileDatasource(pathToVault);
+    const fileDatasource = new FileDatasource(vault.path);
     const credentials = Credentials.fromPassword(password);
-
+    setOpeningVault(true);
     fileDatasource
       .load(credentials)
       .then(Archive.createFromHistory)
       .then(archive => {
-        archive.getGroups().forEach(group => {
-          console.log(group.getEntries());
-        });
+        setOpeningVault(false);
+        openVault(archive, vault.id);
+        onClose();
       })
-      .catch(err => handleErrors(err.toString()));
+      .catch(err => {
+        setOpeningVault(false);
+        handleErrors(err.toString());
+      });
   };
 
   /**
@@ -125,7 +123,7 @@ function OpenVaultModal(props: Props) {
         <Modal.Content className={styles.modalContent}>
           <Box className={styles.box}>
             <h1 className="title" align="center">
-              Unlock {vaultName}
+              Unlock {vault.name}
             </h1>
             <form>
               <Form.Field className={styles.password}>
@@ -159,6 +157,8 @@ function OpenVaultModal(props: Props) {
                   color={themeColor}
                   rounded
                   fullwidth
+                  disabled={openingVault}
+                  loading={openingVault}
                   onClick={handleOpenVault}
                 >
                   OPEN VAULT
@@ -175,10 +175,10 @@ function OpenVaultModal(props: Props) {
 OpenVaultModal.propTypes = {
   show: PropTypes.bool.isRequired,
   themeColor: PropTypes.string.isRequired,
-  pathToVault: PropTypes.string,
-  vaultName: PropTypes.string,
+  vault: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
-  getVaults: PropTypes.func.isRequired
+  getVaults: PropTypes.func.isRequired,
+  openVault: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -186,7 +186,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getVaults: () => dispatch(getVaults())
+  getVaults: () => dispatch(getVaults()),
+  openVault: (vault, vaultId) => dispatch(openVault(vault, vaultId))
 });
 
 export default connect(

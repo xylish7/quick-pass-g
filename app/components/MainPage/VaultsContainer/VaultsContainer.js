@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Popup from 'reactjs-popup';
 import type { ThemeMode } from '../../actions/menu';
-import type { Vault } from '../../actions/vault';
+import type { VaultType } from '../../actions/vault';
 
 import styles from './VaultsContainer.css';
 
@@ -14,20 +14,27 @@ import OpenVaultModal from '../../../ui_components/OpenVaultModal/OpenVaultModal
 
 type Props = {
   themeMode: ThemeMode,
-  vaults: Array<Vault>
+  vaults: Array<VaultType>,
+  openedVaults: Array
 };
 
 function VaultsContainer(props: Props) {
-  const { themeMode, vaults } = props;
+  const { themeMode, vaults, openedVaults } = props;
 
   const [showOpenVaultModal, setOpenCreateVaultModal] = useState(false);
-  const [pathToVault, setPathToVault] = useState('');
-  const [vaultName, setVaultName] = useState('');
+  const [vault, setVault] = useState({});
 
-  const openVault = (vaultName: string, pathToVault: string): void => {
-    setVaultName(vaultName);
-    setPathToVault(pathToVault);
-    setOpenCreateVaultModal(true);
+  const openOrSelect = (vault: VaultType): void => {
+    // Check to see if the vault is open
+    const isOpen = openedVaults.some(
+      openedVault => Object.keys(openedVault)[0] === vault.id
+    );
+    if (isOpen) {
+      console.log('select vault');
+    } else {
+      setVault(vault);
+      setOpenCreateVaultModal(true);
+    }
   };
 
   return (
@@ -38,8 +45,8 @@ function VaultsContainer(props: Props) {
           : 'has-background-grey-darker'
       } ${styles.vaultsContainer}`}
     >
-      {vaults.map((vault: Vault) => (
-        <div key={vault.path} onClick={() => openVault(vault.name, vault.path)}>
+      {vaults.map((vault: VaultType) => (
+        <div key={vault.path} onClick={() => openOrSelect(vault)}>
           <Popup
             on="hover"
             mouseEnterDelay={0}
@@ -56,7 +63,9 @@ function VaultsContainer(props: Props) {
               boxShadow: 'none'
             }}
             offsetX={10}
-            trigger={OpenVaultButton}
+            trigger={() => (
+              <OpenVaultButton openedVaults={openedVaults} vault={vault} />
+            )}
             position="right center"
             closeOnDocumentClick
           >
@@ -68,8 +77,7 @@ function VaultsContainer(props: Props) {
       <AddVaultButton />
       <OpenVaultModal
         show={showOpenVaultModal}
-        vaultName={vaultName}
-        pathToVault={pathToVault}
+        vault={vault}
         onClose={() => setOpenCreateVaultModal(false)}
       />
     </div>
@@ -82,7 +90,8 @@ VaultsContainer.propTypes = {
 
 const mapStateToProps = state => ({
   themeMode: state.menu.themeMode,
-  vaults: state.vault.vaults
+  vaults: state.vault.vaults,
+  openedVaults: state.vault.openedVaults
 });
 
 export default connect(mapStateToProps)(VaultsContainer);

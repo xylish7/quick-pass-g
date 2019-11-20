@@ -3,14 +3,17 @@ import fs from 'fs';
 import type { Dispatch } from '../reducers/types';
 import { USER_VAULTS } from '../constants/local-stores';
 import LocalStore from '../utils/local-store';
+import uuidv4 from 'uuid/v4';
+import { dispatch } from 'rxjs/internal/observable/pairs';
 
 export const SET_VAULT = 'SET_VAULT';
 export const GET_VAULTS = 'GET_VAULTS';
+export const OPEN_VAULT = 'OPEN_VAULT';
 
-export type Vault = {
+export type VaultType = {
   name: string,
   path: string,
-  isOpen: ?string
+  id: String
 };
 
 /**
@@ -29,7 +32,8 @@ export const setVault = (vaultPath: string) => (dispatch: Dispatch): void => {
     // Create vault object
     const newVault: Vault = {
       name: vaultPath.slice(vaultPath.lastIndexOf('\\') + 1, vaultPath.length),
-      path: vaultPath
+      path: vaultPath,
+      id: uuidv4()
     };
 
     vaults.push(newVault);
@@ -65,5 +69,18 @@ export const getVaults = () => (dispatch: Dispatch): void => {
   dispatch({
     type: GET_VAULTS,
     vaults: filteredVaults
+  });
+};
+
+/**
+ * Open a vault
+ */
+export const openVault = (vault, vaultId: string) => (
+  dispatch: Dispatch
+): void => {
+  dispatch({
+    type: OPEN_VAULT,
+    vault,
+    vaultId
   });
 };

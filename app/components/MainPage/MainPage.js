@@ -1,26 +1,28 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import type { Vault } from '../../actions/vault';
+import type { VaultType } from '../../actions/vault';
 
 import styles from './MainPage.css';
 
 import Menu from '../../containers/Menu';
 import VaultsContainer from './VaultsContainer/VaultsContainer';
 import Welcome from '../../containers/Welcome';
+import Vault from './Vault/Vault';
 
 type Props = {
-  vaults: Array<Vault>
+  vaults: Array<VaultType>,
+  openedVaults: Array
 };
 
 function MainPage(props: Props) {
-  const { vaults } = props;
+  const { vaults, openedVaults } = props;
 
   return (
     <React.Fragment>
       <div className={styles.root}>
         {vaults.length > 0 && <VaultsContainer />}
-        <Welcome />
+        {openedVaults.length > 0 ? <Vault /> : <Welcome />}
       </div>
       <Menu />
     </React.Fragment>

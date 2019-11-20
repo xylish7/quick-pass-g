@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { remote } from 'electron';
 import { Button } from 'react-bulma-components';
 import type { ThemeMode } from '../../../actions/menu';
-import type { Vault } from '../../../actions/vault';
+import type { VaultType } from '../../../actions/vault';
 
 import styles from './Welcome.css';
 
@@ -12,7 +12,7 @@ import appIcon from '../../../../resources/icons/256x256.png';
 import CreateVaultModal from '../../../ui_components/CreateVaultModal/CreateVaultModal';
 
 type Props = {
-  vaults: Array<Vault>,
+  vaults: Array<VaultType>,
   themeMode: ThemeMode,
   setVault: (vaultPath: string) => void
 };
