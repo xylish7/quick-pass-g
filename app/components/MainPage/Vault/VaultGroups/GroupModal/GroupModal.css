@@ -1,0 +1,12 @@
+.modalContent {
+  width: 500px !important;
+}
+
+.box {
+  width: 500;
+  margin: 'auto';
+}
+
+.groupName {
+  margin-bottom: 35px !important;
+}

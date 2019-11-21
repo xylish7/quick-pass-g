@@ -16,7 +16,7 @@ type Props = {
   themeColor: ThemeColor,
   vault: VaultType,
   getVaults: () => void,
-  openVault: (vault, vaultId: string) => void,
+  openVault: (vault, vaultId: string, password: string) => void,
   onClose: () => void
 };
 
@@ -30,15 +30,6 @@ function OpenVaultModal(props: Props) {
   });
   const [password, setPassword] = useState('');
   const [openingVault, setOpeningVault] = useState(false);
-
-  /**
-   * Handle password input change
-   *
-   * @param {Event} e
-   */
-  const handlePasswordChange = (e): void => {
-    setPassword(e.target.value);
-  };
 
   /**
    * Ran when open vault button is pressed
@@ -56,7 +47,8 @@ function OpenVaultModal(props: Props) {
       .then(Archive.createFromHistory)
       .then(archive => {
         setOpeningVault(false);
-        openVault(archive, vault.id);
+        openVault(archive, vault.id, password);
+        setPassword('');
         onClose();
       })
       .catch(err => {
@@ -108,6 +100,7 @@ function OpenVaultModal(props: Props) {
    * Ran when remove vault button is pressed
    */
   const handleRemoveVault = (): void => {
+    setPassword('');
     onClose();
     getVaults();
   };
@@ -135,7 +128,7 @@ function OpenVaultModal(props: Props) {
                     name="password"
                     placeholder="Password"
                     value={password}
-                    onChange={handlePasswordChange}
+                    onChange={e => setPassword(e.target.value)}
                   />
                 </Form.Control>
                 {error.hasError && (
@@ -187,7 +180,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getVaults: () => dispatch(getVaults()),
-  openVault: (vault, vaultId) => dispatch(openVault(vault, vaultId))
+  openVault: (vault, vaultId, password) =>
+    dispatch(openVault(vault, vaultId, password))
 });
 
 export default connect(

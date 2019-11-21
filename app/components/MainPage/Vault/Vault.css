@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  width: 100%;
+}
+
+.split {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}

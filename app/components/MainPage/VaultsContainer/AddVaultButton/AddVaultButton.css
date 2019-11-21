@@ -1,0 +1,9 @@
+.addVaultButton {
+  width: 45px;
+  height: 45px;
+  margin: 6px auto;
+}
+
+.addVaultButton > i {
+  font-size: 24px;
+}

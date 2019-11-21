@@ -1,0 +1,21 @@
+.root {
+  padding: 10px;
+}
+
+.titleContainer {
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.addGroupButton {
+  width: 20px;
+  height: 20px;
+}
+
+.addGroupButton > i {
+  font-size: 12px;
+}

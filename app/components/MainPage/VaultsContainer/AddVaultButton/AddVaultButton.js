@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { remote } from 'electron';
-
 import PropTypes from 'prop-types';
+
+import styles from './AddVaultButton.css';
 
 import GrowMenu from '../../../../ui_components/GrowMenu/GrowMenu';
 import GrowMenuItem from '../../../../ui_components/GrowMenu/GrowMenuItem/GrowMenuItem';
@@ -45,7 +46,7 @@ function AddVaultButton(props: Props) {
 
   const renderAddVaultButton = (
     <div
-      className="vault-button add-vault"
+      className={`vault-button ${styles.addVaultButton}`}
       onClick={() => setShowGrowMenu(true)}
     >
       <i className="fas fa-plus" />

@@ -1,0 +1,9 @@
+.openVaultButton {
+  width: 45px;
+  height: 45px;
+  margin: 6px auto;
+}
+
+.openVaultButton > i {
+  font-size: 24px;
+}

@@ -25,6 +25,7 @@
   --black-light: hsl(0, 0%, 14%);
   --black-light-intermediate: hsl(0, 0%, 16%);
   --black-lighter: hsl(0, 0%, 18%);
+  --black-lightest: hsl(0, 0%, 20%);
 
   --grey: hsl(0, 0%, 50%);
 
@@ -32,6 +33,7 @@
   --white-dark: hsl(0, 0%, 98%);
   --white-dark-intermediate: hsl(0, 0%, 96%);
   --white-darker: hsl(0, 0%, 94%);
+  --white-darkest: hsl(0, 0%, 92%);
 }
 
 [data-theme='dark'] {
@@ -54,16 +56,20 @@
   --input-placeholder-color: hsl(0, 0%, 40%);
 
   /* .add-vault-button */
-  --add-vault-button-bg-hover: var(--black-lighter);
-  --add-vault-button-bg-active: var(--black-light);
-  --add-vault-button-color: hsl(0, 0%, 48%);
-
-  /* .open-vault-button */
-  --open-vault-button-color: var(--white-darker);
+  --vault-button-bg-hover: var(--black-lighter);
+  --vault-button-bg-active: var(--black-light);
+  --vault-button-color: hsl(0, 0%, 48%);
 
   /* .grow-menu */
   --grow-menu-bg: var(--black-lighter);
   --grow-menu-list-item-bg-hover: var(--black-light-intermediate);
+
+  /* .gutter-horizontal */
+  --gutter-horizontal-bg: var(--black-lighter);
+
+  /* .groups-list */
+  --groups-list-bg-hover: var(--black-lighter);
+  --groups-list-bg-focus: var(--black-lightest);
 }
 
 [data-theme='light'] {
@@ -78,16 +84,20 @@
   --input-placeholder-color: hsl(0, 0%, 80%);
 
   /* .add-vault-button */
-  --add-vault-button-bg-hover: var(--white-darker);
-  --add-vault-button-bg-active: var(--white-dark);
-  --add-vault-button-color: hsl(0, 0%, 71%);
-
-  /* .open-vault-button */
-  --open-vault-button-color: var(--grey);
+  --vault-button-bg-hover: var(--white-darker);
+  --vault-button-bg-active: var(--white-dark);
+  --vault-button-color: hsl(0, 0%, 71%);
 
   /* .grow-menu */
   --grow-menu-bg: var(--white-darker);
   --grow-menu-list-item-bg-hover: var(--white-dark-intermediate);
+
+  /* .gutter-horizontal */
+  --gutter-horizontal-bg: var(--white-darker);
+
+  /* .groups-list */
+  --groups-list-bg-hover: var(--white-darker);
+  --groups-list-bg-focus: var(--white-darkest);
 }
 
 html {
@@ -149,35 +159,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 45px;
   border: 1.5px solid;
-  margin: 6px auto;
   border-radius: 5px;
   cursor: pointer;
-  color: var(--add-vault-button-color);
+  color: var(--vault-button-color);
 }
 
 .vault-button:hover {
-  background-color: var(--add-vault-button-bg-hover);
+  background-color: var(--vault-button-bg-hover);
 }
 
 .vault-button:active {
-  background-color: var(--add-vault-button-bg-active);
-}
-
-.vault-button > i {
-  font-size: 24px;
-}
-
-/* Add vault button */
-.vault-button.add-vault {
-  color: var(--add-vault-button-color);
-}
-
-/* Open vault button */
-.vault-button.open-vault {
-  color: var(--open-vault-button-color);
+  background-color: var(--vault-button-bg-active);
 }
 
 /*================================= 
@@ -200,6 +193,28 @@ body {
 .grow-menu-list-item:last-child {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+
+/*================================= 
+  Groups List
+===================================*/
+.groups-list-item {
+  margin-bottom: 5px;
+  border-radius: 4px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.groups-list-item:hover {
+  background-color: var(--groups-list-bg-hover);
+}
+
+.groups-list-item:active {
+  background-color: var(--groups-list-bg-focus);
+}
+
+.groups-list-item > i {
+  margin-right: 10px;
 }
 
 /*================================= 
@@ -236,4 +251,12 @@ body {
 
 .popup-arrow {
   background-color: var(--grow-menu-bg) !important;
+}
+
+/*================================= 
+  react-split
+===================================*/
+.gutter.gutter-horizontal {
+  background-color: var(--gutter-horizontal-bg);
+  cursor: e-resize;
 }

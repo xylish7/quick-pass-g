@@ -59,32 +59,13 @@ function Menu(props: Props) {
     setOpen(false);
   };
 
-  // Custom style of the menu togle button dependet of the
-  // [themeColor] prop
-  let menuToggleBackground: string;
-  switch (menu.themeColor) {
-    case 'primary':
-      menuToggleBackground = 'rgb(0, 209, 178)';
-      break;
-    case 'info':
-      menuToggleBackground = 'rgb(32, 156, 238)';
-      break;
-    case 'warning':
-      menuToggleBackground = 'rgb(255, 221, 87)';
-      break;
-    case 'danger':
-      menuToggleBackground = 'rgb(255, 56, 96)';
-      break;
-    default:
-      break;
-  }
-
   return (
     <div ref={containerRef} className={styles.container}>
       <div
         onClick={() => setOpen(!open)}
-        style={{ backgroundColor: menuToggleBackground }}
-        className={`${styles.menuToggle} ${open ? styles.open : null} `}
+        className={`has-background-${menu.themeColor} ${styles.menuToggle} ${
+          open ? styles.open : null
+        } `}
       >
         <span className={`${styles.fas} fas fa-cog`} />
       </div>

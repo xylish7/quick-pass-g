@@ -9,6 +9,7 @@ import { dispatch } from 'rxjs/internal/observable/pairs';
 export const SET_VAULT = 'SET_VAULT';
 export const GET_VAULTS = 'GET_VAULTS';
 export const OPEN_VAULT = 'OPEN_VAULT';
+export const CREATE_GROUP = 'CREATE_GROUP';
 
 export type VaultType = {
   name: string,
@@ -75,12 +76,22 @@ export const getVaults = () => (dispatch: Dispatch): void => {
 /**
  * Open a vault
  */
-export const openVault = (vault, vaultId: string) => (
+export const openVault = (vault, vaultId: string, password: string) => (
   dispatch: Dispatch
 ): void => {
   dispatch({
     type: OPEN_VAULT,
     vault,
-    vaultId
+    vaultId,
+    password
+  });
+};
+
+export const createGroup = (groupName: string) => (
+  dispatch: Dispatch
+): void => {
+  dispatch({
+    type: CREATE_GROUP,
+    groupName
   });
 };

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Popup from 'reactjs-popup';
-import type { ThemeMode } from '../../actions/menu';
+import type { ThemeMode, ThemeColor } from '../../actions/menu';
 import type { VaultType } from '../../actions/vault';
 
 import styles from './VaultsContainer.css';
@@ -14,12 +14,13 @@ import OpenVaultModal from '../../../ui_components/OpenVaultModal/OpenVaultModal
 
 type Props = {
   themeMode: ThemeMode,
+  themeColor: ThemeColor,
   vaults: Array<VaultType>,
   openedVaults: Array
 };
 
 function VaultsContainer(props: Props) {
-  const { themeMode, vaults, openedVaults } = props;
+  const { themeMode, vaults, openedVaults, themeColor } = props;
 
   const [showOpenVaultModal, setOpenCreateVaultModal] = useState(false);
   const [vault, setVault] = useState({});
@@ -64,7 +65,11 @@ function VaultsContainer(props: Props) {
             }}
             offsetX={10}
             trigger={() => (
-              <OpenVaultButton openedVaults={openedVaults} vault={vault} />
+              <OpenVaultButton
+                openedVaults={openedVaults}
+                vault={vault}
+                themeColor={themeColor}
+              />
             )}
             position="right center"
             closeOnDocumentClick
@@ -90,6 +95,7 @@ VaultsContainer.propTypes = {
 
 const mapStateToProps = state => ({
   themeMode: state.menu.themeMode,
+  themeColor: state.menu.themeColor,
   vaults: state.vault.vaults,
   openedVaults: state.vault.openedVaults
 });

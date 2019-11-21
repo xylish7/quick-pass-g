@@ -2,15 +2,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './OpenVaultButton.css';
+
 import type { VaultType } from '../../../../actions/vault';
+import type { ThemeColor } from '../../../../actions/menu';
 
 type Props = {
+  themeColor: ThemeColor,
   vault: VaultType,
   openedVaults: Array
 };
 
-const OpenVaultButton = React.forwardRef((props, ref) => {
-  const { openedVaults, vault, ...other } = props;
+const OpenVaultButton = React.forwardRef((props: Props, ref) => {
+  const { openedVaults, vault, themeColor, ...other } = props;
 
   // Check to see if the vault is open
   const isOpen = openedVaults.some(
@@ -18,17 +22,22 @@ const OpenVaultButton = React.forwardRef((props, ref) => {
   );
 
   return (
-    <div className="vault-button open-vault" ref={ref} {...other}>
+    <div
+      className={`vault-button open-vault ${styles.openVaultButton}`}
+      ref={ref}
+      {...other}
+    >
       {isOpen ? (
-        <i className="fas fa-lock-open" />
+        <i className={`has-text-${themeColor} fas fa-unlock`} />
       ) : (
-        <i className="fas fa-lock" />
+        <i className={`has-text-${themeColor} fas fa-lock `} />
       )}
     </div>
   );
 });
 
 OpenVaultButton.propTypes = {
+  themeColor: PropTypes.string.isRequired,
   vault: PropTypes.object.isRequired,
   openedVaults: PropTypes.array.isRequired
 };
