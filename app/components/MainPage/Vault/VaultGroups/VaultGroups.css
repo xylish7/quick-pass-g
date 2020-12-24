@@ -1,5 +1,6 @@
 .root {
   padding: 10px;
+  max-width: 400px;
 }
 
 .titleContainer {
@@ -18,4 +19,15 @@
 
 .addGroupButton > i {
   font-size: 12px;
+}
+
+.groupIcon {
+  margin-right: 10px;
+}
+
+.groupName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
 }

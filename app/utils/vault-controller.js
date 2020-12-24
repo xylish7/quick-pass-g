@@ -6,7 +6,7 @@ import { Datasources, Credentials } from 'buttercup';
  * @param {Array} vaults
  * @param {Object} selectedVault
  */
-const createGroup = (vaults, selectedVault) => {
+const saveChanges = (vaults, selectedVault) => {
   vaults.forEach(vault => {
     if (vault.id === selectedVault.id) {
       const { FileDatasource } = Datasources;
@@ -18,4 +18,4 @@ const createGroup = (vaults, selectedVault) => {
   });
 };
 
-export { createGroup };
+export { saveChanges };

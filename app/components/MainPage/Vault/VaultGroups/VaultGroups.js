@@ -8,17 +8,19 @@ import type { ThemeColor } from '../../../../actions/menu';
 
 import styles from './VaultGroups.css';
 import GroupModal from './GroupModal/GroupModal';
-import { createGroup } from '../../../../actions/vault';
+import { createGroup, editGroup } from '../../../../actions/vault';
 
 type Props = {
   selectedVault: Object,
   themeColor: ThemeColor,
-  createGroup: (groupName: string) => void
+  createGroup: (groupName: string) => void,
+  editGroup: (group: Object) => void
 };
 
 function VaultGroups(props: Props) {
-  const { selectedVault, themeColor, createGroup } = props;
+  const { selectedVault, themeColor, createGroup, editGroup } = props;
 
+  const [editedGroup, setEditedGroup] = useState({});
   const [groups, setGroups] = useState([]);
   const [showGroupModal, setShowGroupModal] = useState(false);
 
@@ -30,7 +32,8 @@ function VaultGroups(props: Props) {
       const groups = selectedVault.vault.getGroups().map(group => ({
         id: group.id,
         name: group.getTitle(),
-        isSelected: false
+        isSelected: false,
+        isHovered: false
       }));
 
       setGroups(groups);
@@ -55,27 +58,40 @@ function VaultGroups(props: Props) {
   };
 
   /**
-   * Create a new group
+   * On hover of a group show the edit icon
    *
-   * @param {String} groupName
+   * @param {String} groupId
    */
-  const handleCreateGroup = (groupName: string): void => {
-    setShowGroupModal(false);
-    if (typeof groupName === 'string' && groupName !== '') {
-      createGroup(groupName);
+  const handleHoverGroup = (groupId: string, hovered: boolean = true): void => {
+    const clonedGroups = cloneDeep(groups);
+
+    if (hovered) {
+      clonedGroups.forEach(clonedGroup => {
+        clonedGroup.id === groupId
+          ? (clonedGroup.isHovered = true)
+          : (clonedGroup.isHovered = false);
+      });
+    } else {
+      clonedGroups.forEach(clonedGroup => {
+        clonedGroup.isHovered = false;
+      });
     }
+
+    setGroups(clonedGroups);
   };
 
   return (
     <div className={styles.root}>
       <div className={`has-text-${themeColor} ${styles.titleContainer}`}>
         <h1 className={styles.title} style={{ fontSize: 20 }}>
-          {' '}
           Groups
         </h1>
         <div
           className={`vault-button ${styles.addGroupButton}`}
-          onClick={() => setShowGroupModal(true)}
+          onClick={() => {
+            setEditedGroup({});
+            setShowGroupModal(true);
+          }}
         >
           <i className={`has-text-${themeColor} fas fa-plus`} />
         </div>
@@ -91,20 +107,43 @@ function VaultGroups(props: Props) {
                 : 'groups-list-item'
             }`}
             onClick={() => handleSelectGroup(group.id)}
+            onMouseEnter={() => handleHoverGroup(group.id)}
+            onMouseLeave={() => handleHoverGroup(group.id, false)}
           >
             {group.name === 'Trash' ? (
-              <i className="fas fa-trash-alt" />
+              <React.Fragment>
+                <div>
+                  <i className={`fas fa-trash-alt ${styles.groupIcon}`} />
+                  {group.name}
+                </div>
+              </React.Fragment>
             ) : (
-              <i className="fas fa-layer-group" />
+              <React.Fragment>
+                <div className={styles.groupName}>
+                  <i className={`fas fa-layer-group ${styles.groupIcon}`} />
+                  {group.name}
+                </div>
+                {group.isHovered && (
+                  <i
+                    className="fas fa-edit edit-group-icon"
+                    onClick={() => {
+                      setEditedGroup(group);
+                      setShowGroupModal(true);
+                    }}
+                  />
+                )}
+              </React.Fragment>
             )}
-            {group.name}
           </li>
         ))}
       </ul>
       <GroupModal
+        editedGroup={editedGroup}
         show={showGroupModal}
         themeColor={themeColor}
-        onClose={handleCreateGroup}
+        onClose={() => setShowGroupModal(false)}
+        createGroup={createGroup}
+        editGroup={editGroup}
       />
     </div>
   );
@@ -113,7 +152,8 @@ function VaultGroups(props: Props) {
 VaultGroups.propTypes = {
   themeColor: PropTypes.string.isRequired,
   selectedVault: PropTypes.object.isRequired,
-  createGroup: PropTypes.func.isRequired
+  createGroup: PropTypes.func.isRequired,
+  editGroup: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -121,7 +161,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createGroup: groupName => dispatch(createGroup(groupName))
+  createGroup: groupName => dispatch(createGroup(groupName)),
+  editGroup: group => dispatch(editGroup(group))
 });
 
 export default connect(

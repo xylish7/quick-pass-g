@@ -3,7 +3,8 @@ import {
   SET_VAULT,
   GET_VAULTS,
   OPEN_VAULT,
-  CREATE_GROUP
+  CREATE_GROUP,
+  EDIT_GROUP
 } from '../actions/vault';
 import type { Action } from './types';
 import type { VaultType } from '../actions/vault';
@@ -46,10 +47,22 @@ const openVault = (state: VaultState, action: Action) => {
 
 const createGroup = (state: VaultState, action: Action) => {
   const clonedSelectedVault = cloneDeep(state.selectedVault);
-
   clonedSelectedVault.vault.createGroup(action.groupName);
 
-  vaultController.createGroup(state.vaults, clonedSelectedVault);
+  vaultController.saveChanges(state.vaults, clonedSelectedVault);
+
+  return updateObject(state, {
+    selectedVault: clonedSelectedVault
+  });
+};
+
+const editGroup = (state: VaultState, action: Action) => {
+  const clonedSelectedVault = cloneDeep(state.selectedVault);
+  clonedSelectedVault.vault
+    .findGroupByID(action.editedGroup.id)
+    .setTitle(action.editedGroup.name);
+
+  vaultController.saveChanges(state.vaults, clonedSelectedVault);
 
   return updateObject(state, {
     selectedVault: clonedSelectedVault
@@ -69,6 +82,8 @@ export default function counter(
       return openVault(state, action);
     case CREATE_GROUP:
       return createGroup(state, action);
+    case EDIT_GROUP:
+      return editGroup(state, action);
     default:
       return state;
   }

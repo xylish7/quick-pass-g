@@ -21,15 +21,13 @@
 }
 
 :root {
-  --black: #000000;
+  --black: #000;
   --black-light: hsl(0, 0%, 14%);
   --black-light-intermediate: hsl(0, 0%, 16%);
   --black-lighter: hsl(0, 0%, 18%);
   --black-lightest: hsl(0, 0%, 20%);
-
   --grey: hsl(0, 0%, 50%);
-
-  --white: #ffffff;
+  --white: #fff;
   --white-dark: hsl(0, 0%, 98%);
   --white-dark-intermediate: hsl(0, 0%, 96%);
   --white-darker: hsl(0, 0%, 94%);
@@ -142,9 +140,9 @@ body {
   color: var(--input-placeholder-color);
 }
 
-/*================================= 
+/* ================================= 
   custom-electron-titlebar
-===================================*/
+=================================== */
 
 .container-after-titlebar {
   overflow: hidden;
@@ -152,9 +150,9 @@ body {
   color: var(--container-after-titlebar-font-color);
 }
 
-/*================================= 
+/* ================================= 
   Vault button 
-===================================*/
+=================================== */
 .vault-button {
   display: flex;
   align-items: center;
@@ -173,9 +171,9 @@ body {
   background-color: var(--vault-button-bg-active);
 }
 
-/*================================= 
+/* ================================= 
   Grow menu 
-===================================*/
+=================================== */
 
 .grow-menu-list-item {
   cursor: pointer;
@@ -195,10 +193,13 @@ body {
   border-bottom-right-radius: 4px;
 }
 
-/*================================= 
+/* ================================= 
   Groups List
-===================================*/
+=================================== */
 .groups-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 5px;
   border-radius: 4px;
   padding: 3px 10px;
@@ -213,13 +214,9 @@ body {
   background-color: var(--groups-list-bg-focus);
 }
 
-.groups-list-item > i {
-  margin-right: 10px;
-}
-
-/*================================= 
+/* ================================= 
   Scrollbar
-===================================*/
+=================================== */
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -242,9 +239,9 @@ body {
   background: rgb(150, 149, 149);
 }
 
-/*================================= 
+/* ================================= 
   reactjs-popup
-===================================*/
+=================================== */
 .popup-content {
   background-color: var(--grow-menu-bg) !important;
 }
@@ -253,9 +250,9 @@ body {
   background-color: var(--grow-menu-bg) !important;
 }
 
-/*================================= 
+/* ================================= 
   react-split
-===================================*/
+=================================== */
 .gutter.gutter-horizontal {
   background-color: var(--gutter-horizontal-bg);
   cursor: e-resize;

@@ -10,6 +10,7 @@ export const SET_VAULT = 'SET_VAULT';
 export const GET_VAULTS = 'GET_VAULTS';
 export const OPEN_VAULT = 'OPEN_VAULT';
 export const CREATE_GROUP = 'CREATE_GROUP';
+export const EDIT_GROUP = 'EDIT_GROUP';
 
 export type VaultType = {
   name: string,
@@ -93,5 +94,12 @@ export const createGroup = (groupName: string) => (
   dispatch({
     type: CREATE_GROUP,
     groupName
+  });
+};
+
+export const editGroup = editedGroup => (dispatch: Dispatch): void => {
+  dispatch({
+    type: EDIT_GROUP,
+    editedGroup
   });
 };
