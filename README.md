@@ -26,15 +26,6 @@
     </ul>
   <li> copy password to cliboard with a simple click on :clipboard: </li>
 </ul>
-  
-### Roadmap :car: :arrow_right: :sunrise_over_mountains:
-<ul>
-  <li> :heavy_check_mark: <del> Add 4 more different colors </del> </li>
-  <li> :heavy_check_mark: <del> :last_quarter_moon_with_face: Dark / :sun_with_face: Light theme </del> </li>
-  <li> Maybe, someday, it will become a nice <b>password manager</b> </li>
-</ul>
-
-:star: I'm also open to any new features that I can add
 
 ### Installation
 
